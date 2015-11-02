@@ -3,6 +3,7 @@ body {
 }
 
 #sliderParent {
+  background-color: #ff0000;
   position: absolute;
   top: 80%;
   left: 30%;
