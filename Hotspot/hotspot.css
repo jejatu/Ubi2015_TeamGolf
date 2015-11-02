@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+
+#sliderParent {
+  position: absolute;
+  top: 80%;
+  left: 30%;
+  width: 40%;
+  height: 10%;
+}
+
+#slider {
+  background-color: #00ff00;
+  width: 30%;
+  height: 100%;
+}
