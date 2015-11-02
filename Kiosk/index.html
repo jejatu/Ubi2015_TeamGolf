@@ -1,4 +1,66 @@
+<!DOCTYPE html>
 <html>
+	<head>
+	<style>
+	html,body  {
+		background-color: #00CCFF;
+		width: 100%;
+        height: 100%;
+        margin: 0;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
 <body>
+<!-- I Have no idea what I am doing :D -->
+    <canvas id="icanvas" width="1920px" height="1080px" </canvas>
+    <script>
+        var canvas = document.getElementById('icanvas');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext('2d');
+			ctx.fillStyle="#B2E6FF";
+            ctx.fillRect(20,20,1880,180);
+            ctx.strokeRect(20,20,1880,180);
+        }
+		var thctx = canvas.getContext('2d');	
+			thctx.font = "50px Arial"; 
+			thctx.textAlign = "center";  
+			thctx.fillStyle="#000000";
+			thctx.fillText("HEADER",960,120);
+			
+		var u_canvas = canvas.getContext('2d');
+			u_canvas.fillStyle="#B2E6FF";
+			u_canvas.fillRect(20,220,940,825);
+			u_canvas.strokeRect(20,220,940,825);
+			
+		var c_canvas = canvas.getContext('2d');
+			c_canvas.fillStyle="#B2E6FF";
+			c_canvas.fillRect(960,220,940,825);
+			c_canvas.strokeRect(960,220,940,825);
+			
+		var thctx = canvas.getContext('2d');	
+			thctx.font = "50px Arial"; 
+			thctx.textAlign = "center";  
+			thctx.fillStyle="#000000";
+			thctx.fillText("User guide",480,620);
+			
+		var thctx = canvas.getContext('2d');	
+			thctx.font = "50px Arial"; 
+			thctx.textAlign = "center";  
+			thctx.fillStyle="#000000";
+			thctx.fillText("Enter the code:",1440,320);
+			
+    </script>
+
+
 </body>
 </html>
