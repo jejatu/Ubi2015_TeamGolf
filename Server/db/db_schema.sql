@@ -1,0 +1,10 @@
+PRAGMA foreign_keys=ON;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS logs
+(
+	session_id INTEGER PRIMARY KEY AUTOINCREMENT,
+	userid INTEGER UNIQUE NOT NULL,
+	time_of_interaction INTEGER
+);
+COMMIT;
+PRAGMA foreign_keys=OFF;
