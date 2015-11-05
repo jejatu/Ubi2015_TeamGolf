@@ -1,5 +1,5 @@
 var maxLeft = $("#sliderParent").width() - $("#slider").width();
-var nextPage = "interactive.html";
+var interactivePage = "interactive.html";
 
 $(function() {
   $("#slider").draggable({
@@ -7,7 +7,7 @@ $(function() {
     containment: 'parent',
     drag: function(event, ui) {
       if (ui.position.left >= maxLeft) {
-        window.location = nextPage;
+        window.location = interactivePage;
       }
     },
     stop: function(event, ui) {

@@ -3,14 +3,22 @@
     <link rel="stylesheet" type="text/css" href="hotspot.css" />
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js'></script>
+    <script>
+      window.onload = function() {
+        startAds();
+        startSession();
+      }
+    </script>
   </head>
-  <body>
+  <body onMouseMove="resetTimer()">
     <div id="game"></div>
     <div id="ad">
       <img width="50%" height="50%" id="image" />
       <video width="50%" height="50%" id="video"></video>
     </div>
-    <div id="map"></div>
+    <div onMouseDown="startMapMove()" onMouseUp="endMapMove()" onMouseMove="moveMap()" id="map"></div>
     <script src="adcycler.js"></script>
+    <script src="session.js"></script>
+    <script src="map.js"></script>
   </body>
 </html>

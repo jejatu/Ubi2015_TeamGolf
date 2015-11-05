@@ -1,21 +1,26 @@
 var type = "video";
+var muted = true
 var images = ["ads/ad1.png", "ads/ad2.png", "ads/ad3.png"];
 var videos = ["ads/video1.mp4", "ads/video2.mp4", "ads/video3.mp4"];
 var current = 0;
 var interval = 1000;
+var numAdsStarted = 0;
 
 function cycleImages() {
   document.getElementById('image').src = images[current];
   current = (current + 1) % images.length;
+  numAdsStarted++;
 }
 
 function cycleVideos() {
   document.getElementById('video').src = videos[current];
   document.getElementById('video').play();
+  document.getElementById('video').muted = muted;
   current = (current + 1) % images.length;
+  numAdsStarted++;
 }
 
-window.onload = function() {
+function startAds() {
   $("#image").hide();
   $("#video").hide();
 
@@ -31,4 +36,8 @@ window.onload = function() {
       cycleVideos();
     };
   }
+}
+
+function getNumberOfAdsStarted() {
+  return numAdsStarted;
 }

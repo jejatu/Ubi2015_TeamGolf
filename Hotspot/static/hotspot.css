@@ -19,9 +19,10 @@ body {
 }
 
 #map {
-  background-color: #00ff00;
   width: 50%;
   height: 50%;
+  background-image: url(map.png);
+  background-position: -100px -600px;
 }
 
 #game {
