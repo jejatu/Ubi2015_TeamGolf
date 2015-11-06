@@ -5,6 +5,7 @@ import json
 import database
 
 # Media type constants:
+# http://amundsen.com/media-types/collection/
 COLLECTIONJSON = "application/vnd.collection+json"
 
 # Define the application:
@@ -60,7 +61,7 @@ class Sessions(Resource):
 		INPUT: 
 			None
 		OUTPUT:
-			Media type: application/vnd.collection+json (200)
+			(a) Media type: application/vnd.collection+json (200)
 		'''
 		db_sessions = g.db.getSessions()
 		print "lol"
@@ -83,9 +84,9 @@ class Sessions(Resource):
 		Appends a new session entry to the database.
 		
 		INPUT:
-			Media type: application/vnd.collection+json
+			(1) Media type: application/vnd.collection+json
 		OUTPUT:
-			headers: location -> url (201)
+			(a) headers: location -> url (201)
 		'''
 		# Check if request is json:
 		request_data = request.get_json(force=True)
@@ -115,9 +116,9 @@ class Session(Resource):
 		Returns the information of a specific session entry from the database.
 		
 		INPUT:
-			<int>session_id
+			(1) int: session_id
 		OUTPUT:
-			Media type: application/vnd.collection+json (200)
+			(a) Media type: application/vnd.collection+json (200)
 		'''
 		# Retrieve the data from database:
 		try:
@@ -145,10 +146,10 @@ class Session(Resource):
 		Updates a specific session entry.
 		
 		INPUT:
-			<int>session_id
-			Media type: application/vnd.collection+json
+			(1) int: session_id
+			(2) Media type: application/vnd.collection+json
 		OUTPUT:
-			No Content (204)
+			(a) No Content (204)
 		'''
 		pass
 

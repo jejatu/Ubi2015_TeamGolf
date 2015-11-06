@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS session_data
 (
 	session_id INTEGER PRIMARY KEY AUTOINCREMENT,
 	code INTEGER UNIQUE NOT NULL,
-	start_time Time,
-	end_time Time,
+	start_time TEXT,
+	end_time TEXT,
 	place TEXT,
 	number_of_interaction INTEGER,
 	game_score INTEGER DEFAULT NULL,
