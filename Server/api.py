@@ -176,7 +176,7 @@ class Surveys(Resource):
 		INPUT: 
 			None
 		OUTPUT:
-			Media type: application/vnd.collection+json (200)
+			(a)	Media type: application/vnd.collection+json (200)
 		'''
 		db_surveys = g.db.getSurveys()
 		if db_surveys is None:
@@ -198,10 +198,10 @@ class Surveys(Resource):
 		Appends a new survey entry to the database.
 		
 		INPUT:
-			Media type: application/vnd.collection+json
+			(1)	Media type: application/vnd.collection+json
 			
 		OUTPUT:
-			headers: location -> url (201)
+			(a)	headers: location -> url (201)
 		'''
 		# Check if request is json:
 		request_data = request.get_json(force=True)
@@ -239,9 +239,9 @@ class Survey(Resource):
 		Returns the information of a specific survey entry from the database.
 		
 		INPUT:
-			<int>survey_id
+			(1)	int: survey_id
 		OUTPUT:
-			Media type: application/vnd.collection+json (200)
+			(a)	Media type: application/vnd.collection+json (200)
 		'''
 		# Retrieve the data from database:
 		try:
@@ -269,10 +269,10 @@ class Survey(Resource):
 		Updates a specific survey entry with data.
 		
 		INPUT:
-			<int>survey_id
-			Media type: application/vnd.collection+json
+			(1)	int: survey_id
+			(2)	Media type: application/vnd.collection+json
 		OUTPUT:
-			No Content (204)
+			(a)	No Content (204)
 		'''
 		# Check if request is json:
 		request_data = request.get_json(force=True)
@@ -284,17 +284,16 @@ class Survey(Resource):
 		
 		# Try update the survey data:
 		try:
-			new_survey_id = g.db.updateSurvey(survey_id, survey_data)
+			survey_modification = g.db.updateSurvey(survey_id, survey_data)
 		except ValueError as error:
 			return createErrorResponse(400, "Bad request", error.message, "Survey")
 		except RuntimeError as error:
 			return createErrorResponse(409, "Database conflict", error.message, "Survey")
 			
-		if not new_survey_id:
+		if survey_modification is False:
 			return createErrorResponse(500, "Database error", "Unexpected failure.", "Survey")
-			
-		url = api.url_for(Survey, survey_id=new_survey_id)
-		return Response(status=201, headers={"location": url})
+
+		return Response(status=204)
 		
 # == API ROUTES ==
 # Session

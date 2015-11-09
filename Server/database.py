@@ -257,9 +257,9 @@ class ServerDatabase(object):
 								 survey_id))
 						
 			if (cursor.rowcount) > 0:
-				return cursor.lastrowid
+				return True
 			else:
-				return None
+				return False
 		
 	def getSurveys(self):
 		'''
@@ -315,7 +315,7 @@ class ServerDatabase(object):
 			cursor = connection.cursor()
 			cursor.execute("PRAGMA foreign_keys = ON")
 			
-			# Find and get the session row:
+			# Find and get the survey row:
 			cursor.execute("SELECT * FROM survey_data WHERE survey_id = ?", (survey_id,))
 			row = cursor.fetchone()
 			
