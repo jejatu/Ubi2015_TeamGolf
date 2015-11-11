@@ -1,7 +1,7 @@
 import sqlite3, os, datetime
 
-DEFAULT_DB_PATH = "Server/db/logs.db"
-DEFAULT_SCHEMA = "Server/db/db_schema.sql"
+DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "db/logs.db")
+DEFAULT_SCHEMA = os.path.join(os.path.dirname(__file__), "db/db_schema.sql")
 
 class ServerDatabase(object):
 	# Initialization:
