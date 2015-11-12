@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS session_data
 	place TEXT,
 	number_of_interaction INTEGER,
 	game_score INTEGER DEFAULT NULL,
-	type_of_ad TEXT UNIQUE NOT NULL,
+	type_of_ad TEXT NOT NULL,
 	content_ad TEXT
 );
 CREATE TABLE IF NOT EXISTS survey_data
@@ -36,6 +36,6 @@ CREATE TABLE IF NOT EXISTS survey_data
 	public_display_before BOOLEAN,
 	place_public_display TEXT,
 	remember_ad BOOLEAN
-);	
+);
 COMMIT;
 PRAGMA foreign_keys=OFF;
