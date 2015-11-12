@@ -26,7 +26,7 @@ def createErrorResponse(status_code, title, message, resource_type=None):
 def set_database():
 	'''Stores an instance of the database API before each request in flask.g variable accessible only from the app context'''
 	g.db = app.config['DATABASE']
-	
+
 # == HELPERS ==
 def _formatSessionItems(sessions):
 	'''Format session data into json format'''
@@ -71,22 +71,23 @@ def _formatSurveyItems(surveys):
 							{"name": "public_display_before", "value": s["public_display_before"]},
 							{"name": "place_public_display", "value": s["place_public_display"]},
 							{"name": "remember_ad", "value": s["remember_ad"]} ]
-		yield survey					
+		yield survey
 
 def _parseJsonRequest(request_data):
 	'''Parse data from json request'''
 	formatted_data = {}
-	for element in request_data["template"]["data"]:
-		formatted_data[element["name"]] = element["value"]
+	print request_data
+	for key, value in request_data["template"]["data"].iteritems():
+		formatted_data[key] = value
 	return formatted_data
-		
+
 # == RESOURCES ==
 class Sessions(Resource):
 	def get(self):
 		'''
 		Lists all the sessions in the database.
-		
-		INPUT: 
+
+		INPUT:
 			None
 		OUTPUT:
 			(a) Media type: application/vnd.collection+json (200)
@@ -94,7 +95,7 @@ class Sessions(Resource):
 		db_sessions = g.db.getSessions()
 		if db_sessions is None:
 			return createErrorResponse(404, "Not found", "No sessions found in the database", "Sessions")
-	
+
 		# Format the response json(collection representation):
 		collection = {}
 		collection["version"] = "1.0"
@@ -109,7 +110,7 @@ class Sessions(Resource):
 	def post(self):
 		'''
 		Appends a new session entry to the database.
-		
+
 		INPUT:
 			(1) Media type: application/vnd.collection+json
 		OUTPUT:
@@ -119,10 +120,10 @@ class Sessions(Resource):
 		request_data = request.get_json(force=True)
 		if not request_data:
 			return createErrorResponse(415, "Unsupported Media Type", "API can handle only json using application/vnd.collection+json media type", "Sessions")
-		
+
 		# Retrieve data:
 		session_data = _parseJsonRequest(request_data)
-		
+
 		# Try add a new entry:
 		try:
 			new_session_id = g.db.addSession(session_data)
@@ -130,18 +131,18 @@ class Sessions(Resource):
 			return createErrorResponse(400, "Bad request", error.message, "Sessions")
 		except RuntimeError as error:
 			return createErrorResponse(409, "Database conflict", error.message, "Sessions")
-			
+
 		if not new_session_id:
 			return createErrorResponse(500, "Database error", "Unexpected failure.", "Sessions")
-			
+
 		url = api.url_for(Session, session_id=new_session_id)
 		return Response(status=201, headers={"location": url})
-		
+
 class Session(Resource):
 	def get(self, session_id):
 		'''
 		Returns the information of a specific session entry from the database.
-		
+
 		INPUT:
 			(1) int: session_id
 		OUTPUT:
@@ -154,16 +155,16 @@ class Session(Resource):
 			return createErrorResponse(400, "Invalid value", error.message, "Session")
 		except StandardError as error:
 			return createErrorResponse(500, "Database error", error.message, "Session")
-		
+
 		if db_session is None:
 			return createErrorResposne(404, "Not found", "Session with id=(%d) does not exist" % (int(session_id)), "Session")
-		
+
 		# Format the response json(item representaion):
 		collection = {}
 		collection["version"] = "1.0"
 		collection["href"] = api.url_for(Session, session_id=session_id)
 		collection["items"] = [session for session in _formatSessionItems(db_session)]
-		
+
 		# Create response:
 		json_dump = json.dumps({"collection": collection})
 		return Response(json_dump, 200, mimetype=COLLECTIONJSON)
@@ -172,8 +173,8 @@ class Surveys(Resource):
 	def get(self):
 		'''
 		Lists all the surveys in the database.
-		
-		INPUT: 
+
+		INPUT:
 			None
 		OUTPUT:
 			(a)	Media type: application/vnd.collection+json (200)
@@ -181,7 +182,7 @@ class Surveys(Resource):
 		db_surveys = g.db.getSurveys()
 		if db_surveys is None:
 			return createErrorResponse(404, "Not found", "No surveys found in the database", "Surveys")
-	
+
 		# Format the response json(collection representation):
 		collection = {}
 		collection["version"] = "1.0"
@@ -192,14 +193,14 @@ class Surveys(Resource):
 		# Create response:
 		json_dump = json.dumps({"collection": collection})
 		return Response(json_dump, 200, mimetype=COLLECTIONJSON)
-	
+
 	def post(self):
 		'''
 		Appends a new survey entry to the database.
-		
+
 		INPUT:
 			(1)	Media type: application/vnd.collection+json
-			
+
 		OUTPUT:
 			(a)	headers: location -> url (201)
 		'''
@@ -207,10 +208,10 @@ class Surveys(Resource):
 		request_data = request.get_json(force=True)
 		if not request_data:
 			return createErrorResponse(415, "Unsupported Media Type", "API can handle only json using application/vnd.collection+json media type", "Surveys")
-		
+
 		# Retrieve data:
 		pincode_data = _parseJsonRequest(request_data)
-		
+
 		# Validate the pincode(or skip if no code = no session):
 		if "code" in pincode_data:
 			session_id = g.db.getValidSession(pincode_data)
@@ -218,7 +219,7 @@ class Surveys(Resource):
 				return createErrorResponse(404, "Not found", "Pincode expired. No session can be found.", "Surveys")
 		else:
 			session_id = None
-			
+
 		# Try add a new entry:
 		try:
 			new_survey_id = g.db.addSurvey(session_id)
@@ -226,18 +227,18 @@ class Surveys(Resource):
 			return createErrorResponse(400, "Bad request", error.message, "Surveys")
 		except RuntimeError as error:
 			return createErrorResponse(409, "Database conflict", error.message, "Surveys")
-			
+
 		if not new_survey_id:
 			return createErrorResponse(500, "Database error", "Unexpected failure.", "Surveys")
-			
+
 		url = api.url_for(Survey, survey_id=new_survey_id)
 		return Response(status=201, headers={"location": url})
-		
+
 class Survey(Resource):
 	def get(self, survey_id):
 		'''
 		Returns the information of a specific survey entry from the database.
-		
+
 		INPUT:
 			(1)	int: survey_id
 		OUTPUT:
@@ -250,24 +251,24 @@ class Survey(Resource):
 			return createErrorResponse(400, "Invalid value", error.message, "Survey")
 		except StandardError as error:
 			return createErrorResponse(500, "Database error", error.message, "Survey")
-		
+
 		if db_survey is None:
 			return createErrorResposne(404, "Not found", "Survey with id=(%d) does not exist" % (int(survey_id)), "Survey")
-		
+
 		# Format the response json(item representaion):
 		collection = {}
 		collection["version"] = "1.0"
 		collection["href"] = api.url_for(Survey, survey_id=survey_id)
 		collection["items"] = [survey for survey in _formatSurveyItems(db_survey)]
-		
+
 		# Create response:
 		json_dump = json.dumps({"collection": collection})
 		return Response(json_dump, 200, mimetype=COLLECTIONJSON)
-	
+
 	def put(self, survey_id):
 		'''
 		Updates a specific survey entry with data.
-		
+
 		INPUT:
 			(1)	int: survey_id
 			(2)	Media type: application/vnd.collection+json
@@ -278,10 +279,10 @@ class Survey(Resource):
 		request_data = request.get_json(force=True)
 		if not request_data:
 			return createErrorResponse(415, "Unsupported Media Type", "API can handle only json using application/vnd.collection+json media type", "Survey")
-		
+
 		# Retrieve data:
 		survey_data = _parseJsonRequest(request_data)
-		
+
 		# Try update the survey data:
 		try:
 			survey_modification = g.db.updateSurvey(survey_id, survey_data)
@@ -289,12 +290,12 @@ class Survey(Resource):
 			return createErrorResponse(400, "Bad request", error.message, "Survey")
 		except RuntimeError as error:
 			return createErrorResponse(409, "Database conflict", error.message, "Survey")
-			
+
 		if survey_modification is False:
 			return createErrorResponse(500, "Database error", "Unexpected failure.", "Survey")
 
 		return Response(status=204)
-		
+
 # == API ROUTES ==
 # Session
 api.add_resource(Sessions, "/api/sessions/", endpoint="sessions")

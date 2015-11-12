@@ -1,9 +1,21 @@
+//database information
 var id = 0;
-var start = 0;
-var numAdsSeen = 0;
-var timer = 10000;
+var code = 123;
+var startTime = 0;
+var place = "home";
+var numberOfInteractions = 0;
+var gameScore = 0;
+var typeOfAd = ""
+var contentAd = ""
+
+//idle variables
+var timer = 2000;
 var timeoutId = null;
 var idlePage = "index.html";
+
+$(document).mousedown(function(event) {
+    numberOfInteractions++;
+});
 
 function getRightNow() {
   var today = new Date();
@@ -48,16 +60,38 @@ function generateUUID(){
 function startSession() {
   startTimer();
   id = generateUUID();
-  start = new Date().getTime();
+  startTime = new Date().getTime();
   console.log("started session " + id + " at " + getRightNow());
 }
 
+function sendSession() {
+  var session = { session_id: id,
+                  code: code,
+                  start_time: startTime,
+                  end_time: new Date().getTime(),
+                  place: place,
+                  number_of_interaction: numberOfInteractions,
+                  game_score: gameScore,
+                  type_of_ad: getTypeOfAd(),
+                  content_ad: getAdsStarted()
+                };
+  console.log(session);
+  $.ajax({
+    url: '/api/sessions/',
+    type: 'POST',
+    data: JSON.stringify({template: {data: session}}),
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    async: false,
+    success: function(msg) {
+        alert(msg);
+    }
+});
+}
+
 function endSession() {
-  var length = new Date().getTime() - start;
-  console.log("ended session " + id + " at " + getRightNow());
-  console.log("ads started: " + getNumberOfAdsStarted());
-  console.log("session length: " + length + "ms");
-  window.location = idlePage;
+  sendSession();
+  //window.location = idlePage;
 }
 
 function startTimer() {
