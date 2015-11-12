@@ -65,8 +65,7 @@ function startSession() {
 }
 
 function sendSession() {
-  var session = { session_id: id,
-                  code: code,
+  var session = { code: code,
                   start_time: startTime,
                   end_time: new Date().getTime(),
                   place: place,
