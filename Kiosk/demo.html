@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="get" onsubmit="return printText()">        
+<br />
+<p>Did you notice the display?</p>
+<input type="radio" name="noticeDisplay" class="noticeDisplay" value="yes">Yes<br />
+<input type="radio" name="noticeDisplay" class="noticeDisplay" value="no">No<br />
+
+<p>What did you seen on the screen?</p>
+<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A game">A game<br />
+<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="Ads">Ads<br />
+<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A game and ads">A game and ads<br />
+<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="An error message">An error message<br />
+<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A unicorn">A unicorn<br />
+
+<p>Did the display raise positive or negative emotions or feelings in you?</p>
+<p> really positive 
+<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="1">
+<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="2">
+<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="3">
+<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="4">
+<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="5">
+<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="6">
+<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="7">
+really negative </p>
+
+<br /><br />
+<input type="submit" value="submit" />
+<br /><br />
+<p>User noticed the display</p>
+<b id='output1'></b><br />
+
+<p>User see on the display:</p>
+<b id='output2'></b><br />
+
+<p>User Feeling:</p>
+<b id='output3'></b><br />
+
+<script>function printText(){
+var result1 = Array.prototype.slice.call(document.querySelectorAll(".noticeDisplay:checked")).map(function(el) {
+        return el.value;
+    }).join(', ')
+var result2 = Array.prototype.slice.call(document.querySelectorAll(".WhatnoticeDisplay:checked")).map(function(el) {
+        return el.value;
+    }).join(', ')
+var result3 = Array.prototype.slice.call(document.querySelectorAll(".FeelingsDisplay:checked")).map(function(el) {
+        return el.value;
+    }).join(', ')
+
+document.getElementById('output1').innerHTML = result1;
+document.getElementById('output2').innerHTML = result2;
+document.getElementById('output3').innerHTML = result3;
+
+
+return false;
+}
+</script>
+
+</body>
+</html>
