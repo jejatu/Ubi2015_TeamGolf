@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>QUESTIONNAIRE</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        <link rel='stylesheet' href='../res/questionnaire_styles.css'>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <title>PAGE 1</title>
+        
+        <script type="text/javascript">
+            function getUrlParameter(sParam)
+            {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++) 
+                {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam) 
+                    {
+                        return sParameterName[1];
+                    }
+                }
+            }
+            
+            function start_logging()
+            {
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth()+1; //January is 0!
+                var yyyy = today.getFullYear();
+                
+                var hh = today.getHours();
+                var min = today.getMinutes();
+
+                if(dd<10) {
+                    dd='0'+dd;
+                } 
+
+                if(mm<10) {
+                    mm='0'+mm;
+                }
+                
+                if(hh<10){
+                    hh='0'+hh;
+                }
+                
+                if(min<10){
+                    min='0'+min;
+                }
+
+                rightnow = yyyy+'-'+mm+'-'+dd+'-'+hh+':'+min;
+                
+                //Log new session
+                    var session_id = 'action=new_entry&session_id='+getUrlParameter("session_id");
+                    $.ajax({ 
+                    type : 'POST',
+                    data : session_id,
+                    url  : 'http://www.ubioulu.fi/adstudy/questionnaire_tabs/PHP/logger.php',
+                    });
+                //Log starting time
+                    var timestamp = 'action=log_question&session_id=' + getUrlParameter("session_id") + '&question_no=time_started&question_ans='+rightnow;
+                    $.ajax({ 
+                    type : 'POST',
+                    data : timestamp,
+                    url  : 'http://www.ubioulu.fi/adstudy/questionnaire_tabs/PHP/logger.php',
+                    });
+            }
+            
+            function nextPage(gender)
+            {
+                //Log data here
+                    var data_entry = 'action=log_question&session_id=' + getUrlParameter("session_id") + '&question_no=gender&question_ans='+gender;
+                    $.ajax({ 
+                    type : 'POST',
+                    data : data_entry,
+                    url  : 'http://www.ubioulu.fi/adstudy/questionnaire_tabs/PHP/logger.php',
+                    });
+                window.location.href = "page_2.html?session_id="+getUrlParameter("session_id");
+            }
+        </script>
+    </head>
+    <body onload=start_logging()>
+        <div class="content_wrapper">
+    <!-- HEADER STARTS HERE -->
+            <div class="q_header_container">
+                <p class="q_header_text">Hienoa! Aloitetaan!</p>
+            </div>
+            <div class="q_text_container">
+                <p class="q_text">
+                   <strong>Kerro ensiksi sukupuolesi: </strong>
+                </p> 
+                <p class="q_text">Ole hyvä ja valitse sukupuolesi alla olevista vaihtoehdoista:</p>
+            <div class="genderDiv" style="background-color:#8ac9ff">
+                <div class="genderTextDiv">MIES</div>
+                <div class="genderButton">
+                    <div class="round-button-circle" onclick=nextPage("male")>
+                        <a href="#" onclick=nextPage("male") class="round-button"><img src="../res/male-1.png" class="genderIcon"></a>
+                    </div>
+                </div>
+            </div>
+                <div class="genderDiv" style="background-color:#f68aff">
+                   <div class="genderTextDiv">NAINEN</div>
+                    <div class="genderButton">
+                    <div class="round-button-circle" style="background-color:#cb02c3" onclick=nextPage("female")>
+                        <a onclick=nextPage("female") class="round-button"><img src="../res/female-1.png" class="genderIcon"></a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    
+    </body>
