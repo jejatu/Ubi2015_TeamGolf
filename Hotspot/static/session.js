@@ -9,7 +9,7 @@ var typeOfAd = ""
 var contentAd = ""
 
 //idle variables
-var timer = 2000;
+var timer = 30000;
 var timeoutId = null;
 var idlePage = "index.html";
 
@@ -61,7 +61,23 @@ function startSession() {
   startTimer();
   id = generateUUID();
   startTime = new Date().getTime();
+  generateCode();
   console.log("started session " + id + " at " + getRightNow());
+}
+
+function generateCode() {
+  var randomCode = Math.floor(Math.random() * 999);
+  if (randomCode < 10) {
+    return "00" + randomCode;
+  }
+  else if (randomCode < 100) {
+    return "0" + randomCode;
+  }
+  code = randomCode.toString();
+}
+
+function getCode() {
+  return code;
 }
 
 function sendSession() {
@@ -80,12 +96,8 @@ function sendSession() {
     type: 'POST',
     data: JSON.stringify({template: {data: session}}),
     contentType: 'application/json; charset=utf-8',
-    dataType: 'json',
-    async: false,
-    success: function(msg) {
-        alert(msg);
-    }
-});
+    dataType: 'json'
+  });
 }
 
 function endSession() {

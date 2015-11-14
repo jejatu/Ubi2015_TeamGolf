@@ -26,8 +26,33 @@ body {
 }
 
 #game {
-  background-color: #0000ff;
+  background-color: #000000;
   width: 50%;
   height: 100%;
   float: right;
+  position: relative;
+}
+
+#start {
+  background-color: #000000;
+  color: #ffffff;
+  position: absolute;
+  width: 40%;
+  height: 15%;
+  top: 40%;
+  left: 30%;
+  font-size: 3em;
+  text-align: center;
+}
+
+#pin {
+  background-color: #ffffff;
+  color: #000000;
+  position: absolute;
+  width: 40%;
+  top: 40%;
+  left: 30%;
+  font-size: 3em;
+  text-align: center;
+  display: none;
 }

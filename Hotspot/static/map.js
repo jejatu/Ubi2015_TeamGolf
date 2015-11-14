@@ -8,6 +8,10 @@ $(document).mousemove(function(event) {
     mouse.y = event.pageY;
 });
 
+$("#map").mousedown(function(event) {
+    event.preventDefault();
+});
+
 $("#map").mouseleave(function(event) {
     endMapMove();
 });

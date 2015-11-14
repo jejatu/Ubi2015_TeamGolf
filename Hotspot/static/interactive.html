@@ -12,8 +12,19 @@
   </head>
   <body onMouseMove="resetTimer()">
     <div id="game">
-	<iframe src="palikka_web.html" width ="100%" height ="100%" ></iframe>
-	</div>
+  	   <!-- <iframe src="palikka_web.html" width ="100%" height ="100%" ></iframe> -->
+       <canvas width="200" height="200" id="gameCanvas">
+       </canvas>
+       <div onMouseDown="startGame()" id="start">
+         Touch here to start a game.
+       </div>
+       <div id="pin">
+         <div>Your pincode:</div>
+         <div id="code"></div>
+         <input type="button" value="OK" onclick="endSession();" />
+       </div>
+       <script src="game.js"></script>
+  	</div>
     <div id="ad">
       <img width="50%" height="50%" id="image" />
       <video width="50%" height="50%" id="video"></video>
