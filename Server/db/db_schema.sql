@@ -24,18 +24,19 @@ CREATE TABLE IF NOT EXISTS survey_data
 	ad_content TEXT,
 	ads_interesting BOOLEAN,
 	cause_interest TEXT,
-	ads_annoyed BOOLEAN,
-	cause_annoying TEXT,
 	ads_attention BOOLEAN,
 	might_buy BOOLEAN,
 	ads_attention_general BOOLEAN,
 	public_displays_suited BOOLEAN,
-	printed_ad_worser BOOLEAN,
-	television_ad_worser BOOLEAN,
 	kind_of_ad TEXT,
-	public_display_before BOOLEAN,
-	place_public_display TEXT,
-	remember_ad BOOLEAN
+	remember_ad BOOLEAN,
+	focus TEXT,
+	affect_interaction TEXT,
+	stop_motivation TEXT,
+	our_location_suitable BOOLEAN,
+	suitable_Location TEXT,
+	feeling_Sounds TEXT,
+	best_kind_of_ads TEXT 	
 );
 COMMIT;
 PRAGMA foreign_keys=OFF;
