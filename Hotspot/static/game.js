@@ -12,7 +12,7 @@ function createEnemy() {
 var player = {x: 300, y: 600};
 var enemies = []
 
-var enemyTimer = setInterval('createEnemy()', 200);
+var enemyTimer = null;
 
 canvas.onmousemove = movePlayer;
 
@@ -34,7 +34,17 @@ function movePlayer(event) {
 
 function startGame() {
   $("#start").hide();
+  enemyTimer = setInterval('createEnemy()', 100);
   update(0);
+}
+
+function endGame() {
+  gameOver = true;
+  if (enemyTimer != null) {
+    clearInterval(enemyTimer);
+  }
+  $("#code").html(getCode());
+  $("#pin").show();
 }
 
 function update() {
@@ -43,18 +53,15 @@ function update() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#00ff00";
-    ctx.fillRect(player.x - 16, player.y - 16, 32, 32);
+    ctx.fillRect(player.x - 32, player.y - 32, 64, 64);
 
     for (var i = 0; i < enemies.length; i++) {
-      enemies[i].y += 10;
+      enemies[i].y += 16;
       ctx.fillStyle = "#ff0000";
       ctx.fillRect(enemies[i].x - 2, enemies[i].y - 2, 4, 4);
-      if (enemies[i].x > player.x - 16 && enemies[i].x < player.x + 16 &&
-          enemies[i].y > player.y - 16 && enemies[i].y < player.y + 16) {
-        gameOver = true;
-        clearInterval(enemyTimer);
-        $("#code").html(getCode());
-        $("#pin").show();
+      if (enemies[i].x > player.x - 32 && enemies[i].x < player.x + 32 &&
+          enemies[i].y > player.y - 32 && enemies[i].y < player.y + 32) {
+		endGame();
       }
     }
   }

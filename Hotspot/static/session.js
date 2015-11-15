@@ -102,7 +102,7 @@ function sendSession() {
 
 function endSession() {
   sendSession();
-  //window.location = idlePage;
+  window.location = idlePage;
 }
 
 function startTimer() {
