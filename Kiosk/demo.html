@@ -2,41 +2,68 @@
 <html>
 <body>
 
-<form method="get" onsubmit="return printText()">        
-<br />
-<p>Did you notice the display?</p>
-<input type="radio" name="noticeDisplay" class="noticeDisplay" value="yes">Yes<br />
-<input type="radio" name="noticeDisplay" class="noticeDisplay" value="no">No<br />
+<form method="get" onsubmit="return printText()">
 
-<p>What did you seen on the screen?</p>
-<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A game">A game<br />
-<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="Ads">Ads<br />
-<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A game and ads">A game and ads<br />
-<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="An error message">An error message<br />
-<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A unicorn">A unicorn<br />
+<div id="qpage1" >      
+	<br />
+	<p>Did you notice the display?</p>
+	<input type="radio" name="noticeDisplay" class="noticeDisplay" value="yes">Yes<br />
+	<input type="radio" name="noticeDisplay" class="noticeDisplay" value="no">No<br />
 
-<p>Did the display raise positive or negative emotions or feelings in you?</p>
-<p> really positive 
-<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="1">
-<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="2">
-<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="3">
-<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="4">
-<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="5">
-<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="6">
-<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="7">
-really negative </p>
+	<p>What did you seen on the screen?</p>
+	<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A game">A game<br />
+	<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="Ads">Ads<br />
+	<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A game and ads">A game and ads<br />
+	<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="An error message">An error message<br />
+	<input type="checkbox" name="WhatnoticeDisplay" class="WhatnoticeDisplay" value="A unicorn">A unicorn<br />
 
+	<p>Did you realize ads on the screen?</p>
+	<input type="radio" name="realize_ads" class="realize_ads" value="yes">Yes<br />
+	<input type="radio" name="realize_ads" class="realize_ads" value="no">No<br />
+	
+	<p>Did the display raise positive or negative emotions or feelings in you?</p>
+	<p> really positive 
+	<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="1">
+	<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="2">
+	<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="3">
+	<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="4">
+	<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="5">
+	<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="6">
+	<input type="checkbox" name="FeelingsDisplay" class="FeelingsDisplay" value="7">
+	really negative </p>
+
+	<br /><br />
+	<input name="next1" value="next" onclick="show('qpage2');hide('qpage1');" type="submit"/>
+	<br /><br />
+</div>
+<div id="qpage2" style="display:none;">      
+	<br />
+	<p>How many ads did you see?</p>
+	<input type="radio" name="number_of_ads" class="number_of_ads" value="0">0<br />
+	<input type="radio" name="number_of_ads" class="number_of_ads" value="1-3">1-3<br />
+	<input type="radio" name="number_of_ads" class="number_of_ads" value="4-6">4-6<br />
+	<input type="radio" name="number_of_ads" class="number_of_ads" value="more than 6">more than 6<br />
+
+	<!--<p>Add Content</p> -->
+	
+	<p>Did any of the shown ads gain your interest?</p>
+	<input type="radio" name="ads_Interesting" class="ads_Interesting" value="yes">Yes<br />
+	<input type="radio" name="ads_Interesting" class="ads_Interesting" value="no">No<br />
+	
+	<p>What cause your interest?</p>
+	<input type="checkbox" name="cause_interest" class="cause_interest" value="ads are entertaining">Ads are entertaining<br />
+	<input type="checkbox" name="cause_interest" class="cause_interest" value="products seems to be useful">Products seems to be useful<br />
+	<input type="checkbox" name="cause_interest" class="cause_interest" value="I desire the product">I desire the product<br />
+
+	<br /><br />
+	<input name="next2" value="next" onclick="show('qpage3');hide('qpage2');" type="submit"/>
+	<br /><br />
+</div>
+<div id="qpage3" style="display:none;">      
 <br /><br />
-<input type="submit" value="submit" />
+<input name="send_data" type="submit" value="send data"/>
 <br /><br />
-<p>User noticed the display</p>
-<b id='output1'></b><br />
-
-<p>User see on the display:</p>
-<b id='output2'></b><br />
-
-<p>User Feeling:</p>
-<b id='output3'></b><br />
+</div>
 
 <script>function printText(){
 var result1 = Array.prototype.slice.call(document.querySelectorAll(".noticeDisplay:checked")).map(function(el) {
@@ -45,17 +72,37 @@ var result1 = Array.prototype.slice.call(document.querySelectorAll(".noticeDispl
 var result2 = Array.prototype.slice.call(document.querySelectorAll(".WhatnoticeDisplay:checked")).map(function(el) {
         return el.value;
     }).join(', ')
-var result3 = Array.prototype.slice.call(document.querySelectorAll(".FeelingsDisplay:checked")).map(function(el) {
+var result3 = Array.prototype.slice.call(document.querySelectorAll(".realize_ads:checked")).map(function(el) {
+        return el.value;
+    }).join(', ')
+var result4 = Array.prototype.slice.call(document.querySelectorAll(".FeelingsDisplay:checked")).map(function(el) {
+        return el.value;
+    }).join(', ')
+var result5 = Array.prototype.slice.call(document.querySelectorAll(".number_of_ads:checked")).map(function(el) {
+        return el.value;
+    }).join(', ')
+var result7 = Array.prototype.slice.call(document.querySelectorAll(".ads_Interesting:checked")).map(function(el) {
+        return el.value;
+    }).join(', ')
+var result8 = Array.prototype.slice.call(document.querySelectorAll(".cause_interest:checked")).map(function(el) {
         return el.value;
     }).join(', ')
 
-document.getElementById('output1').innerHTML = result1;
-document.getElementById('output2').innerHTML = result2;
-document.getElementById('output3').innerHTML = result3;
-
-
 return false;
 }
+</script>
+
+<script type="text/javascript">
+ function show(id) {
+    var e = document.getElementById(id);
+    e.style.display = 'block';
+ }
+</script>
+<script type="text/javascript">
+ function hide(id) {
+    var e = document.getElementById(id);
+    e.style.display =  'none';
+ }
 </script>
 
 </body>
