@@ -59,26 +59,27 @@ def _formatSurveyItems(surveys):
 							{"name": "ad_content", "value": s["ad_content"]},
 							{"name": "ads_interesting", "value": s["ads_interesting"]},
 							{"name": "cause_interest", "value": s["cause_interest"]},
-							{"name": "ads_annoyed", "value": s["ads_annoyed"]},
-							{"name": "cause_annoying", "value": s["cause_annoying"]},
 							{"name": "ads_attention", "value": s["ads_attention"]},
 							{"name": "might_buy", "value": s["might_buy"]},
 							{"name": "ads_attention_general", "value": s["ads_attention_general"]},
 							{"name": "public_displays_suited", "value": s["public_displays_suited"]},
-							{"name": "printed_ad_worser", "value": s["printed_ad_worser"]},
-							{"name": "television_ad_worser", "value": s["television_ad_worser"]},
 							{"name": "kind_of_ad", "value": s["kind_of_ad"]},
-							{"name": "public_display_before", "value": s["public_display_before"]},
-							{"name": "place_public_display", "value": s["place_public_display"]},
-							{"name": "remember_ad", "value": s["remember_ad"]} ]
+							{"name": "remember_ad", "value": s["remember_ad"]},
+							{"name": "focus", "value": s["focus"]},
+							{"name": "affect_interaction", "value": s["affect_interaction"]},
+							{"name": "stop_motivation", "value": s["stop_motivation"]},
+							{"name": "our_location_suitable", "value": s["our_location_suitable"]},
+							{"name": "suitable_location", "value": s["suitable_location"]},
+							{"name": "feeling_sounds", "value": s["feeling_sounds"]},
+							{"name": "best_kind_of_ads", "value": s["best_kind_of_ads"]}
+		]
 		yield survey
 
 def _parseJsonRequest(request_data):
 	'''Parse data from json request'''
 	formatted_data = {}
-	print request_data
-	for key, value in request_data["template"]["data"].iteritems():
-		formatted_data[key] = value
+	for element in request_data["template"]["data"]:
+		formatted_data[element["name"]] = element["value"]
 	return formatted_data
 
 # == RESOURCES ==
@@ -168,7 +169,7 @@ class Session(Resource):
 		# Create response:
 		json_dump = json.dumps({"collection": collection})
 		return Response(json_dump, 200, mimetype=COLLECTIONJSON)
-
+		
 class Surveys(Resource):
 	def get(self):
 		'''
@@ -214,7 +215,7 @@ class Surveys(Resource):
 
 		# Validate the pincode(or skip if no code = no session):
 		if "code" in pincode_data:
-			session_id = g.db.getValidSession(pincode_data)
+			session_id = g.db.getValidSession(pincode_data["code"])
 			if session_id is None:
 				return createErrorResponse(404, "Not found", "Pincode expired. No session can be found.", "Surveys")
 		else:
@@ -253,7 +254,7 @@ class Survey(Resource):
 			return createErrorResponse(500, "Database error", error.message, "Survey")
 
 		if db_survey is None:
-			return createErrorResposne(404, "Not found", "Survey with id=(%d) does not exist" % (int(survey_id)), "Survey")
+			return createErrorResponse(404, "Not found", "Survey with id=(%d) does not exist" % (int(survey_id)), "Survey")
 
 		# Format the response json(item representaion):
 		collection = {}

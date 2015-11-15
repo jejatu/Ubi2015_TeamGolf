@@ -1,40 +1,32 @@
+DEBUG = false;
+
+var survey_url = "";
+
 function checkCode()
 {
-  var code = document.getElementById("c_input").textContent;
+	var code = document.getElementById("c_input").textContent;
 
-  if (code.length == 3) {
-    //window.location.href = "page_1.html";
-    var survey = {code: code.toString()};
+	if (code.length == 3) {
+		var codeData = [{name: "code", value: code.toString()}];
 
-    $(document).ready(function() {
-      $.ajax({
-        url: '/api/surveys/',
-        type: 'POST',
-        data : JSON.stringify({template: {data: survey}}),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function(responseText) { // Get the result and associated session_id if code is correct
-          //if no such code is found...
-          if(responseText == 0){
-              document.getElementById("c_input").innerHTML = "";
-              alert("Hups, antamaasi koodia ei tunnistettu! (koodi: " + code + ")");
-          }
-          //if code is found...
-          else if(responseText > 0){
-              //get the associated session id for the given code, and pass as parameter to 1st page
-              $.post({
-                  data: checkSession,
-                  success: function(session_id){
-                      window.location.href = "page_1.html?session_id="+session_id;
-                  }
-              });
-          }
-          //if all goes to hell
-          else{
-              alert('Oh noes, jotain meni vikaan tietokantayhteydessä: ' + responseText);
-          }
-        }
-      });
-    });
-  }
+		var successCb = function(data, textStatus, jqXHR) {
+			if (DEBUG) {
+			console.log("RECEIVED RESPONSE: data: ", data, ", textStatus: ", textStatus);
+			}
+			
+			survey_url = jqXHR.getResponseHeader("Location");
+			sessionStorage.setItem("survey_url", survey_url);
+			window.location.href = "test.html"
+		};
+
+		var failCb = function(jqXHR, textStatus, errorThrown) {
+			if (DEBUG) {
+				console.log("ERROR: textStatus: ", textStatus, ", error: ", errorThrown);
+			}
+		};
+
+		APIClient.addSurvey(codeData, successCb, failCb);
+		
+		return false;
+	}
 }

@@ -152,7 +152,7 @@ class ServerDatabase(object):
 		Checks if pin code matches a session entry in the database and is not expired.
 		
 		INPUT:
-			(1)	int: pin_code
+			(1)	string: pin_code
 		OUTPUT:
 			(a)	returns session_id of the valid session
 			(b)	returns None if no valid session is found
@@ -175,7 +175,8 @@ class ServerDatabase(object):
 			# Compare results and return id if a valid session is found:
 			for row in rows:
 				dict = self.rowToDict(row, cursor)
-				if curr_time - dict["end_time"] < datetime.timedelta(hours=1):
+				end_time = datetime.datetime.fromtimestamp(dict["end_time"]/1e3)
+				if curr_time - end_time < datetime.timedelta(hours=1):
 					return dict["session_id"]
 					
 			return None
@@ -224,10 +225,11 @@ class ServerDatabase(object):
 		
 		INPUT:
 			(1) dictionary: survey_dict
-				keys: survey_id, session_id, notice_display, content_screen, realize_ads, rating_feelings, number_of_ads,
-						ad_content, ads_interesting, cause_interest, ads_annoyed, cause_annoying, ads_attention,
-						might_buy, ads_attention_general, public_display_suited, printed_ad_worser, television_ad_worser,
-						kind_of_ad, public_display_before, place_public_display, remember_ad
+				keys: survey_id, session_id, notice_display,content_screen,realize_ads,
+				rating_feelings,number_of_ads,ad_content,ads_interesting,cause_interest,
+				ads_attention,might_buy,ads_attention_general,public_displays_suited,
+				kind_of_ad,remember_ad,focus,affect_interaction,stop_motivation,
+				our_location_suitable,suitable_location,feeling_sounds,best_kind_of_ads
 		OUTPUT:
 			(a) returns survey_id of the updated entry
 			(b) return None if entry cannot be modified
@@ -251,10 +253,10 @@ class ServerDatabase(object):
 			# Modify the survey entry in the database:
 			cursor.execute(sql2,(survey_dict["notice_display"],survey_dict["content_screen"],survey_dict["realize_ads"],survey_dict["rating_feelings"],
 								 survey_dict["number_of_ads"],survey_dict["ad_content"],survey_dict["ads_interesting"],survey_dict["cause_interest"],
-								 survey_dict["ads_annoyed"],survey_dict["cause_annoying"],survey_dict["ads_attention"],survey_dict["might_buy"],
-								 survey_dict["ads_attention_general"],survey_dict["public_display_suited"],survey_dict["printed_ad_worser"],survey_dict["television_ad_worser"],
-								 survey_dict["kind_of_ad"],survey_dict["public_display_before"],survey_dict["place_public_display"],survey_dict["remember_ad"],
-								 survey_id))
+								 survey_dict["ads_attention"],survey_dict["might_buy"],survey_dict["ads_attention_general"],survey_dict["public_displays_suited"],
+								 survey_dict["kind_of_ad"],survey_dict["remember_ad"],survey_dict["focus"],survey_dict["affect_interaction"],
+								 survey_dict["stop_motivation"],survey_dict["our_location_suitable"],survey_dict["suitable_location"],survey_dict["feeling_sounds"],
+								 survey_dict["best_kind_of_ads"], survey_id))
 						
 			if (cursor.rowcount) > 0:
 				return True

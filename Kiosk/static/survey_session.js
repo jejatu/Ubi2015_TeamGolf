@@ -1,22 +1,35 @@
 // REMEMBER to include apiclient!
 var DEBUG = true;
 
-//database information
-var id = 0;
-var code = "";
-var startTime = 0;
-var place = "home";
-var numberOfInteractions = 0;
-var gameScore = 0;
-var typeOfAd = "";
-var contentAd = "";
+//Survey database variables:
+var survey_id = 0;
+var session_id = 0;
+var notice_display = null;
+var content_screen = "";
+var realize_ads = null;
+var rating_feelings = 0;
+var number_of_ads = 0;
+var ad_content = "";
+var ads_interesting = null;
+var cause_interest = "";
+var ads_attention = null;
+var might_buy = null;
+var ads_attention_general = null;
+var public_displays_suited = null;
+var kind_of_ad = "";
+var remember_ad = null;
+var focus = "";
+var affect_interaction = "";
+var stop_motivation = "";
+var our_location_suitable = null;
+var suitable_location = "";
+var feeling_sounds = "";
+var best_kind_of_ads = "";
 
 //idle variables
 var timer = 30000;
 var timeoutId = null;
 var idlePage = "index.html";
-
-
 
 $(document).mousedown(function(event) {
     numberOfInteractions++;
@@ -52,77 +65,14 @@ function getRightNow() {
   return datetime;
 }
 
-function generateUUID(){
-  var d = new Date().getTime();
-  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = (d + Math.random()*16)%16 | 0;
-    d = Math.floor(d/16);
-    return (c=='x' ? r : (r&0x7|0x8)).toString(16);
-  });
-  return uuid;
-};
-
 function startSession() {
 	startTimer();
-	id = generateUUID();
 	startTime = new Date().getTime();
 	
-	invalid_codes = getInvalidCodes();
-	
-	if (invalid_codes.length > 0) {
-		do {
-			generateCode();
-		}
-		while ($.inArray(code, invalid_codes) == -1);
-	}
-	else {
-		generateCode();
-	}
 	console.log("started session " + id + " at " + getRightNow());
 }
 
-function getInvalidCodes() {
-	var invalid_codes = [];
-	
-	var successCb = function(data, textStatus, jqXHR) {
-		if (DEBUG) {
-			console.log("RECEIVED RESPONSE: data: ", data, ", textStatus: ", textStatus);
-		}
-		
-		var items = data.collection.items;
-		for (var i = 0; i < items; i++)
-		{
-			invalid_codes.push((items[i].code).toString());
-		}
-	};
-	
-	var failCb = function(errorThrown, textStatus, jqXHR) {
-		if (DEBUG) {
-			console.log("ERROR: textStatus: ", textStatus, ", error: ", errorThrown);
-		}
-	};
-	
-	APIClient.getSessions(successCb, failCb);
-	
-	return invalid_codes;
-}
-
-function generateCode() {
-	var randomCode = Math.floor(Math.random() * 999);
-	if (randomCode < 10) {
-	return "00" + randomCode;
-	}
-	else if (randomCode < 100) {
-	return "0" + randomCode;
-	}
-	code = randomCode.toString();
-}
-
-function getCode() {
-  return code;
-}
-
-function sendSession() {
+function sendSurvey() {
 	var sessionData = [	
 		{name: "code", value: code},
 		{name: "start_time", value: startTime},
@@ -152,7 +102,7 @@ function sendSession() {
 }
 
 function endSession() {
-  sendSession();
+  sendSurvey();
   window.location = idlePage;
 }
 
@@ -168,3 +118,7 @@ function resetTimer() {
 function executeTimer() {
   endSession();
 }
+
+$(function() {
+
+})

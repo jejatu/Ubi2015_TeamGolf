@@ -3,7 +3,7 @@ BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS session_data
 (
 	session_id INTEGER PRIMARY KEY AUTOINCREMENT,
-	code INTEGER UNIQUE NOT NULL,
+	code TEXT UNIQUE,
 	start_time DATETIME,
 	end_time DATETIME,
 	place TEXT,
@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS survey_data
 	affect_interaction TEXT,
 	stop_motivation TEXT,
 	our_location_suitable BOOLEAN,
-	suitable_Location TEXT,
-	feeling_Sounds TEXT,
+	suitable_location TEXT,
+	feeling_sounds TEXT,
 	best_kind_of_ads TEXT 	
 );
 COMMIT;
