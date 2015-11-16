@@ -16,7 +16,7 @@ var timer = 30000;
 var timeoutId = null;
 var idlePage = "index.html";
 
-
+var invalid_codes = [];
 
 $(document).mousedown(function(event) {
     numberOfInteractions++;
@@ -67,7 +67,7 @@ function startSession() {
 	id = generateUUID();
 	startTime = new Date().getTime();
 	
-	invalid_codes = getInvalidCodes();
+	getInvalidCodes();
 	
 	if (invalid_codes.length > 0) {
 		do {
@@ -82,8 +82,6 @@ function startSession() {
 }
 
 function getInvalidCodes() {
-	var invalid_codes = [];
-	
 	var successCb = function(data, textStatus, jqXHR) {
 		if (DEBUG) {
 			console.log("RECEIVED RESPONSE: data: ", data, ", textStatus: ", textStatus);
@@ -104,7 +102,7 @@ function getInvalidCodes() {
 	
 	APIClient.getSessions(successCb, failCb);
 	
-	return invalid_codes;
+	return false;
 }
 
 function generateCode() {
@@ -168,3 +166,8 @@ function resetTimer() {
 function executeTimer() {
   endSession();
 }
+
+$(function() {
+	startAds();
+	startSession();
+})

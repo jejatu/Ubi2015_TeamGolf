@@ -237,7 +237,7 @@ class ServerDatabase(object):
 		#todo: validate survey_dict so can assure it contains all required data.
 		
 		sql1 = "SELECT * FROM survey_data WHERE survey_id = ?"
-		sql2 = "UPDATE survey_data SET notice_display = ?, content_screen = ?, realize_ads = ?, rating_feelings = ?, number_of_ads = ?, ad_content = ?, ads_interesting = ?, cause_interest = ?, ads_annoyed = ?, cause_annoying = ?, ads_attention = ?, might_buy = ?, ads_attention_general = ?, public_display_suited = ?, printed_ad_worser = ?, television_ad_worser = ?, kind_of_ad = ?, public_display_before = ?, place_public_display = ?, remember_ad = ? WHERE survey_id = ?"
+		sql2 = "UPDATE survey_data SET notice_display = ?, content_screen = ?, realize_ads = ?, rating_feelings = ?, number_of_ads = ?, ad_content = ?, ads_interesting = ?, cause_interest = ?, ads_attention = ?, might_buy = ?, ads_attention_general = ?, public_displays_suited = ?, kind_of_ad = ?, remember_ad = ?, focus = ?, affect_interaction = ?, stop_motivation = ?, our_location_suitable = ?, suitable_location = ?, feeling_sounds = ?, best_kind_of_ads = ? WHERE survey_id = ?"
 		
 		with sqlite3.connect(self.db_path) as connection:
 			connection.row_factory = sqlite3.Row

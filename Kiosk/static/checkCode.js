@@ -16,7 +16,7 @@ function checkCode()
 			
 			survey_url = jqXHR.getResponseHeader("Location");
 			sessionStorage.setItem("survey_url", survey_url);
-			window.location.href = "test.html"
+			window.location.href = "survey.html"
 		};
 
 		var failCb = function(jqXHR, textStatus, errorThrown) {
