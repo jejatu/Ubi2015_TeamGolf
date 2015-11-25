@@ -1,5 +1,5 @@
 // REMEMBER to include apiclient!
-var DEBUG = true;
+var DEBUG = false;
 
 //database information
 var id = 0;
@@ -64,7 +64,6 @@ function generateUUID(){
 
 function startSession() {
 	startTimer();
-	id = generateUUID();
 	startTime = new Date().getTime();
 	
 	getInvalidCodes();
@@ -73,12 +72,13 @@ function startSession() {
 		do {
 			generateCode();
 		}
-		while ($.inArray(code, invalid_codes) == -1);
+		while ($.inArray(code, invalid_codes) != -1);
 	}
 	else {
 		generateCode();
 	}
-	console.log("started session " + id + " at " + getRightNow());
+	$("#waitcode").hide();
+	console.log("Started a new session at " + getRightNow() + " with a code: " + code);
 }
 
 function getInvalidCodes() {
@@ -117,7 +117,9 @@ function generateCode() {
 }
 
 function getCode() {
-  return code;
+	while (code != "") {
+		return code;
+	}
 }
 
 function sendSession() {
@@ -168,6 +170,5 @@ function executeTimer() {
 }
 
 $(function() {
-	startAds();
 	startSession();
 })

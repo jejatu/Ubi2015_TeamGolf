@@ -1,19 +1,25 @@
 <html>
+
   <head>
     <link rel="stylesheet" type="text/css" href="hotspot.css" />
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+    <script src='jquery.ui.touch-punch.min.js'></script>
     <script src="apiclient.js"></script>
-	<script>
-      window.onload = function() {
-        startAds();
-      }
+    <script src="adcycler.js"></script>
+    <script type="text/javascript">
+    	window.onload = function() {
+        	startAds();
+      	}
     </script>
   </head>
+  
   <body>
     <img width="100%" height="100%" id="image" />
-    <video width="100%" height="100%" id="video"></video>
-    <script src="adcycler.js"></script>
+    <video width="100%" height="100%" id="video">
+    	<source src="ads/video1.mp4" type="video/mp4" id="ad_src"></source>
+    </video>
+    
     <div id = "sliderParent">
 		<img src ="slide.png"/>
 		<div id = "slider"/>
@@ -21,4 +27,5 @@
 	</div>
     <script src="slidetounlock.js"></script>
   </body>
+  
 </html>

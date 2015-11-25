@@ -1,14 +1,12 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="hotspot.css" />
-	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
     <script src="apiclient.js"></script>
   </head>
   <body onMouseMove="resetTimer()">
     <div id="game">
-  	   <!-- <iframe src="palikka_web.html" width ="100%" height ="100%" ></iframe> -->
        <canvas width="200" height="200" id="gameCanvas">
        </canvas>
        <div onMouseDown="startGame()" id="start">
@@ -16,18 +14,21 @@
        </div>
        <div id="pin">
          <div>Your pincode:</div>
+         <div id="waitcode">Generating the code...</div>
          <div id="code"></div>
          <input type="button" value="OK" onclick="endSession();" />
-       </div>
-       <script src="game.js"></script>
+       </div> 
   	</div>
+  	
     <div id="ad">
       <img width="50%" height="50%" id="image" />
       <video width="50%" height="50%" id="video"></video>
     </div>
+    
     <div onMouseDown="startMapMove()" onMouseUp="endMapMove()" onMouseMove="moveMap()" id="map"></div>
-	<script src="adcycler.js"></script>
+    <script src="adcycler.js"></script>
     <script src="session.js"></script>
     <script src="map.js"></script>
+    <script src="game.js"></script>
   </body>
 </html>

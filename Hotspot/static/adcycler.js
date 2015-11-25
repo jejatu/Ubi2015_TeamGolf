@@ -13,11 +13,14 @@ function cycleImages() {
 }
 
 function cycleVideos() {
-  document.getElementById('video').src = videos[current];
-  document.getElementById('video').play();
-  document.getElementById('video').muted = muted;
-  current = (current + 1) % images.length;
-  adsStarted.push(current);
+	var video = document.getElementById("video");;
+	document.getElementById("ad_src").src = videos[current];
+	
+	video.play();
+	video.muted = muted;
+	
+	current = (current + 1) % videos.length;
+	adsStarted.push(current);
 }
 
 function startAds() {
@@ -45,3 +48,8 @@ function getTypeOfAd() {
 function getAdsStarted() {
   return adsStarted.join();
 }
+
+
+$(function () {
+	startAds();
+})

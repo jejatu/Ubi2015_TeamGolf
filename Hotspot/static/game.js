@@ -5,16 +5,16 @@ canvas.height = document.getElementById("game").clientHeight;
 
 var gameOver = false;
 
-function createEnemy() {
-  enemies.push({x: Math.random() * canvas.width, y: 0});
-}
-
 var player = {x: 300, y: 600};
-var enemies = []
+var enemies = [];
 
 var enemyTimer = null;
 
 canvas.onmousemove = movePlayer;
+
+function createEnemy() {
+	enemies.push({x: Math.random() * canvas.width, y: 0});
+}
 
 function getMousePos(canvas, evt) {
   var rect = canvas.getBoundingClientRect();
