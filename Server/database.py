@@ -251,12 +251,12 @@ class ServerDatabase(object):
 				raise RuntimeError("Survey does not exists.")
 			
 			# Modify the survey entry in the database:
-			cursor.execute(sql2,(survey_dict["notice_display"],survey_dict["content_screen"],survey_dict["realize_ads"],survey_dict["rating_feelings"],
-								 survey_dict["number_of_ads"],survey_dict["ad_content"],survey_dict["ads_interesting"],survey_dict["cause_interest"],
-								 survey_dict["ads_attention"],survey_dict["might_buy"],survey_dict["ads_attention_general"],survey_dict["public_displays_suited"],
-								 survey_dict["kind_of_ad"],survey_dict["remember_ad"],survey_dict["focus"],survey_dict["affect_interaction"],
-								 survey_dict["stop_motivation"],survey_dict["our_location_suitable"],survey_dict["suitable_location"],survey_dict["feeling_sounds"],
-								 survey_dict["best_kind_of_ads"], survey_id))
+			cursor.execute(sql2,(survey_dict["age"],survey_dict["gender"],survey_dict["what_was_on_the_screen"],survey_dict["did_it_raise_positive_or_negative_emotions"],
+								 survey_dict["how_many_ads_did_you_see"],survey_dict["describe_the_ads_you_saw"],survey_dict["did_any_of_ads_gain_intrest"],survey_dict["did_ads_annoy_why"],
+								 survey_dict["ads_gained_attention"],survey_dict["found_ads_interesting"],survey_dict["might_buy"],survey_dict["disp_better_than_printed_ad"],
+								 survey_dict["disp_better_than_television_ad"],survey_dict["disp_ads_annoy_me"],survey_dict["pay_attention_to_ads"],survey_dict["often_buy_products_on_ads"],
+								 survey_dict["pub_disp_suited_for_ads"],survey_dict["where_else_seen_public_displays"],survey_dict["remember_seeing_ads_on_pub_disp"],survey_dict["seen_pub_disp_for_other_than_ads"],
+								 survey_id))
 						
 			if (cursor.rowcount) > 0:
 				return True
