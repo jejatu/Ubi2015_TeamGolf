@@ -1,0 +1,52 @@
+<html>
+	<head>
+    	<link rel="stylesheet" type="text/css" href="hotspot.css" />
+    	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    	<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+    	<script src="apiclient.js"></script>
+    	<script src="session.js"></script>
+    	<script src="adcycler.js"></script>
+    	<script type="text/javascript">
+    		window.onload = function() {
+        		startSession();
+        		startAds();
+      		}
+    	</script>
+  	</head>
+  	<body onMouseMove="resetTimer()">
+  		<div id="content">
+  		
+			<div id="content-left">
+				<div id="ad">
+					<div class="img_content">
+						<img id="image2" />
+					</div>
+					<div class="video_content">
+						<video id="video">
+							<source src="ads/video1.webm" type="video/webm" id="webm_src"></source>
+							<source src="ads/video1.mp4" type="video/mp4" id="mp4_src"></source>
+						</video>
+					</div>
+				</div>
+	
+				<div onMouseDown="startMapMove()" onMouseUp="endMapMove()" onMouseMove="moveMap()" id="map"></div>
+			</div>
+
+			<div id="content-right">
+				<div id="quiz">
+				</div>
+				<!-- TEMPORARY - EDIT WHEN THE SURVEY IS INTEGRATED!-->
+				<a id="pinlink" href="#" style="color:#ffffff">GETCODE</a>
+				<div id="pin">
+					<h1>Your pincode:</h1>
+					<p id="waitcode">Generating code...</p>
+					<div id="code"></div>
+					<input id="codeButton" type="button" value="OK" onclick="endSession();" style="display:none;" />
+				</div>
+			</div>
+		</div>
+    	
+    	
+    	<script src="map.js"></script>
+    </body>
+</html>

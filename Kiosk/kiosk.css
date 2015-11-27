@@ -1,0 +1,308 @@
+body {
+  margin: 0;
+  background-color: #00CCFF;
+}
+
+#content_wrapper
+{
+    width: 100%;
+    height: 100%;
+}
+
+
+#header{
+    background-color: #B2E6FF;
+    position: absolute;
+    top: 3%;
+    left: 1%;
+    right: 0;
+    bottom: 0;
+    width: 98%;
+    height: 20%;
+    color: #000000;
+}
+
+#Blocks{
+    background-color: #B2E6FF;
+    position: absolute;
+    top: 25%;
+    left: 51%;
+    right: 0;
+    bottom: 0;
+    width: 48%;
+    height: 72%;
+}
+
+@font-face
+{
+    font-family: helveticaNeueUL;
+    src:url('../res/helvetica-neue-ultralight.ttf');
+}
+
+
+#content_wrapper
+{
+    width: 100%;
+    height: 100%;
+}
+
+#footer
+{
+    position: absolute;
+    top: 87%;
+    left: 5%;
+    width: 90%;
+    height: 12%;
+    text-align: center;
+    background-color: #5d95ff;;
+    border: white 2px solid; 
+}
+
+.footer_text
+{
+    position: relative;
+    top: 10%;
+    font-family: "helveticaNeue";
+    color: white;
+    font-size: 1.2vh;
+    letter-spacing: 1;
+}
+
+.intro_div
+{
+    width:49%;
+    height:100%;
+    position: relative;
+    float:left;
+    border-right: solid white 2px;
+}
+.q_header_container
+{
+    position: absolute;
+    top: 2%;
+    left: 5%;
+    width: 90%;
+    height: 12%;
+    text-align: center;
+    background-color: #5d95ff;
+    border: white 2px solid;
+}
+
+.q_header_text
+{
+    position: relative;
+
+    font-family: "helveticaNeue";
+    color: white;
+    font-size: 4vh;
+    letter-spacing: 3;
+}
+
+.q_text_container
+{
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 90%;
+    height: 80%;
+    background-color: #5d95ff;;
+    border: white 2px solid;
+
+}
+
+.q_text
+{
+    font-family: "helveticaNeue";
+    position: relative;
+    width: 95%;
+    top: 5%;
+    left: 2%;
+    color: white;
+    font-size: 3vh;
+}
+
+.code_div
+{
+    position: absolute;
+    top: 10%;
+    left: 25%;
+    width: 50%;
+    height: 15%;
+    background-color: #f4c500;
+    border: 2px solid white;
+}
+
+.code_helper
+{
+    position: absolute;
+    top: 0%;
+    left: 38%;
+    font-family: "helveticaNeue";
+    text-align: center;
+    color: white;
+    font-size: 2vh;
+    letter-spacing: 3;
+}
+
+.code_input
+{
+    position: relative;
+    top: 5%;
+    width: 100%;
+    font-family: "helveticaNeue";
+    text-align: center;
+    color: white;
+    font-size: 3vh;
+    letter-spacing: 20;
+    background-color: inherit;
+    border: 0;
+}
+
+#numpad
+{
+    position: absolute;
+    left: 15%;
+    top: 35%;
+    background-color: lightgray;
+    width: 70%;
+    height: 52%;
+    border: solid white 2px;
+}
+
+#key_table
+{
+    width:100%;
+    height:100%;
+    border:solid 1px black;
+}
+.key{
+    border:solid 1px black;
+    background-color:#fff;
+    text-align:center;
+    color:#9bbeff;
+    cursor:pointer;
+    font-family: "helveticaNeue";
+    font-size: 3vh;
+}
+
+.btn{
+    border:solid 1px black;
+    text-align:center;
+    color:#fcb6b6;
+    cursor:pointer;
+    background-color:#fff;
+    width:33.3%;
+    font-family: "helveticaNeue";
+    font-size: 3vh;
+}
+
+.continue_div
+{
+    position: absolute;
+    top: 10%;
+    left: 79%;
+    width: 40%;
+}
+
+.round-button {
+	width:35%;
+}
+.round-button-circle {
+	width: 100%;
+	height:0;
+	padding-bottom: 100%;
+    border-radius: 50%;
+	border:3px solid #cfdcec;
+    overflow:hidden;
+    
+    background: #4679BD; 
+    box-shadow: 0 0 3px gray;
+}
+.round-button-circle:hover {
+	background:#30588e;
+}
+.round-button a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
+    
+	text-align:center;
+	color:#e2eaf3;
+    font-family:"helveticaNeue";
+    font-size:1em;
+    font-weight:bold;
+    text-decoration:none;
+	cursor: pointer;
+}
+
+.genderDiv
+{
+    position: relative;
+    float: left;
+    bottom:-10%;
+    left: 0.5%;
+    width: 45%;
+    height: 60%;
+    border: solid white 2px;
+    margin-left: 25px;
+}
+
+.genderTextDiv
+{
+    width:100%;
+    height: 10%;
+    text-align: center;
+    font-family: "helveticaNeue";
+    color: white;
+    font-size: 3vh;
+    padding-top: 20px;
+}
+
+.genderButton
+{
+    position: absolute;
+    top: 18%;
+    left: 28%;
+    width: 45%;
+    text-align: center;
+}
+
+.genderIcon
+{
+    position:absolute;
+    top: 48%;
+    left:60%;
+    height:110px;
+    width: 80px;
+}
+
+.bottom_continue_div
+{
+    position:absolute;
+    width:100%;
+    height:30%;
+    border-top: 2px solid white;
+    bottom:0%;
+}
+
+.text_answer
+{
+    position: absolute;
+    top:40%;
+    left:2%;
+    width: 96%;
+    height: 25%;
+    font-size: 3vh;
+}
+
+.checkbox_label
+{
+    position:absolute;
+    top:47%;
+    font-family: "helveticaNeue";
+    color: white;
+}

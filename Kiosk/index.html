@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <link rel="stylesheet" type="text/css" href="kiosk.css" />
+		<script src="apiclient.js"></script>
+		<script src="checkCode.js"></script>
+		<script src="numpadPressed.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	</head>
+
+	<body>
+	<!--	<div id="header" text = "Header"></div><div id="Blocks"></div> -->
+	<!-- <div id ="Blocks" style ="left: 1%" ></div> -->
+	        <div class="content_wrapper">
+    <!-- HEADER STARTS HERE -->
+            <div class="q_header_container">
+                <p class="q_header_text">Kysely: vastaa ja voita leffalippuja!</p>
+            </div>
+
+    <!-- CONTENT STARTS HERE-->
+            <div class="q_text_container">
+                <div class="intro_div">
+                <p class="q_text">
+                   <strong>LUE TÄMÄ ENSIN: </strong>
+                </p>
+                <p class="q_text">Osallistuaksesi tähän kyselyyn täytyy sinulla olla 3-numeroinen koodi, jonka voit syöttää viereiseen kenttään.</p>
+                <p class="q_text">Mikäli sinulla ei vielä ole koodia, ole hyvä ja käy ensin osallistumassa tutkimukseen yläkuppilassa sijaitsevalla näytöllä. Saat tarvitsemasi koodin näytöltä.</p>
+                </div>
+                <div class="intro_div" style="border:0">
+                <div id="c_div" class="code_div">
+                    <p class="code_input" id="c_input"></p>
+                </div>
+                <div class="continue_div">
+                    <div class="round-button"><div class="round-button-circle">
+                        <a onclick="checkCode()" class="round-button">OK</a>
+                    </div></div>
+                </div>
+                <p class="code_helper">SYÖTÄ KOODI:</p>
+
+                <div id="numpad">
+                    <table id="key_table">
+        <tr>
+            <td class="key" onclick=numpadPressed("1")>1</td>
+            <td class="key" onclick=numpadPressed("2")>2</td>
+            <td class="key" onclick=numpadPressed("3")>3</td>
+        </tr>
+        <tr>
+            <td class="key" onclick=numpadPressed("4")>4</td>
+            <td class="key" onclick=numpadPressed("5")>5</td>
+            <td class="key" onclick=numpadPressed("6")>6</td>
+        </tr>
+        <tr>
+            <td class="key" onclick=numpadPressed("7")>7</td>
+            <td class="key" onclick=numpadPressed("8")>8</td>
+            <td class="key" onclick=numpadPressed("9")>9</td>
+        </tr>
+        <tr>
+            <td class="btn" onclick=numpadPressed("del")>DEL</td>
+            <td class="key" onclick=numpadPressed("0")>0</td>
+            <td class="btn" onclick=numpadPressed("clr")>CLR</td>
+        </tr>
+    </table>
+                </div>
+            </div>
+                </div>
+   <!-- FOOTER STARTS HERE-->
+            <div id="footer">
+                <p class="footer_text">Kyselyn totetuttajana Oulun yliopiston tietotekniikan osaston Urban Computing and Cultures -tutkimusryhmä</p>
+                <p class="footer_text">Yhteystietojensa jättäneiden vastaajien kesken arvotaan 5kpl kahden hengen leffalippupaketteja Finnkinon teattereihin</p>
+                <p class="footer_text">Arvonta suoritetaan helmikuussa 2016, voittajille ilmoitetaan henkilökohtaisesti</p>
+            </div>
+        </div>
+
+</body>
+</html>
