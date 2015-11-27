@@ -36,11 +36,11 @@
 							<output id="ageOutput" for="age" class="q_text">?</output>
 							</div>
 							<p class="q_label">
-							<input name="age" id="age" type=range min=15 max=75 step=1 style="width:75%; height:5%" onchange=updateAge(this.value)>
+							<input name="age" id="age" type=range min=15 max=75 step=1 style="width:55%; height:5%" onchange=updateAge(this.value)>
 							</p>
 							<br></br>
-							<input type="button" value="Back" class="bbutton">
-							<input type="button" value="Next" class="nbutton">
+							<input type="button" id="buttons" value="Back" class="bbutton">
+							<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					
 					<div class="q2" style="display:none;">
@@ -49,12 +49,12 @@
 						<p class="q_text">Please select your gender on options below</p>
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<br></br>
-						<input type="radio" name="gender" class="Gender" value="Male">Male
-						<input type="radio" name="gender" class="Gender" value="Famle">Famle
-						<input type="radio" name="gender" class="Gender" value="Other">Other
+						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Male">Male
+						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Famle">Famle
+						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Other">Other
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 						
 						
@@ -65,8 +65,8 @@
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<textarea rows=4 cols=50 id="what_was_on_the_screen" name="what_was_on_the_screen" class="text_answer" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>	
 					<div class="q4" style="display:none;">
 						<h2>Okay! Next question (2/18):</h2>
@@ -82,8 +82,8 @@
 						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="6">
 						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="7">positive
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					
 					<div class="q5" style="display:none;">
@@ -98,8 +98,8 @@
 							<input name="how_many_ads_did_you_see" id="ads" type=range min=1 max=30 step=1 style="width:35%; height:5%" onchange=updateValue(this.value)>
 						</p>
 						<br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					
 					<div class="q6" style="display:none;">
@@ -109,8 +109,8 @@
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<textarea rows=4 cols=50 id="describe_the_ads_you_saw" name="describe_the_ads_you_saw" class="text_answer2" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q7" style="display:none;">
 						<h2>Ok! Next question (5/18):</h2>
@@ -119,8 +119,8 @@
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<textarea rows=4 cols=50 id="did_any_of_ads_gain_intrest" name="did_any_of_ads_gain_intrest" class="text_answer3" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q8" style="display:none;">
 						<h2>Great! Next question (6/18):</h2>
@@ -129,8 +129,8 @@
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<textarea rows=4 cols=50 id="did_ads_annoy_why" name="did_ads_annoy_why" class="text_answer4" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q9" style="display:none;">
 						<h2>Okay! Next question (7/18):</h2>
@@ -146,8 +146,8 @@
 						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="6">
 						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q10" style="display:none;">
 						<h2>Great! Next question (8/18):</h2>
@@ -163,8 +163,8 @@
 						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="6">
 						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q11" style="display:none;">
 						<h2>Ok! Next question (9/18):</h2>
@@ -180,8 +180,8 @@
 						<input type="radio" name="might_buy" class="might_buy" value="6">
 						<input type="radio" name="might_buy" class="might_buy" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q12" style="display:none;">
 						<h2>Awesome! Next question (10/18):</h2>
@@ -197,8 +197,8 @@
 						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="6">
 						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q13" style="display:none;">
 						<h2>Okay! Next question (11/18):</h2>
@@ -214,8 +214,8 @@
 						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="6">
 						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q14" style="display:none;">
 						<h2>Ok! Next question (12/18):</h2>
@@ -231,8 +231,8 @@
 						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="6">
 						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q15" style="display:none;">
 						<h2>Okay! Next question (13/18):</h2>
@@ -248,8 +248,8 @@
 						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="6">
 						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q16" style="display:none;">
 						<h2>Great! Next question (14/18):</h2>
@@ -265,8 +265,8 @@
 						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="6">
 						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q17" style="display:none;">
 						<h2>Great! Next question (15/18):</h2>
@@ -282,8 +282,8 @@
 						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="6">
 						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="7">Fully agree
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q18" style="display:none;">
 						<h2>Almost there! Next question (16/18):</h2>
@@ -292,8 +292,8 @@
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<textarea rows=4 cols=50 id="where_else_seen_public_displays" name="where_else_seen_public_displays" class="text_answer5" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q19" style="display:none;">
 						<h2>Great! Next question (17/18):</h2>
@@ -302,8 +302,8 @@
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<textarea rows=4 cols=50 id="remember_seeing_ads_on_pub_disp" name="remember_seeing_ads_on_pub_disp" class="text_answer5" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 					<div class="q20" style="display:none;">
 						<h2>Good! Last question (18/18):</h2>
@@ -312,8 +312,8 @@
 						<p class="q_text">Press 'next' after to continue to next question</p>
 						<textarea rows=4 cols=50 id="seen_pub_disp_for_other_than_ads" name="seen_pub_disp_for_other_than_ads" class="text_answer5" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Next" class="nbutton">
 					</div>
 
 					<div class="q21" style ="display:none;">
@@ -324,18 +324,17 @@
 						<p class="q_text">Finish the questionnaire by pressing the 'Send' button.
 						<br>
 						<br>
-						<p class="q_label">Name:</p>
-						<div class="required_field">
-						<input type="text" name="name" id="qname">
-						<p id="required_name">Required</p>
-						</div>
-						<br>
-						<p class="q_label">Email:</p>
-						<input type="text" name="email" id="qemail">
-						<p id="required_email">Required</p>
+						<form>
+							Name
+							<input type="text" name="name" id="qname">
+							<p id="required_name">Required</p>
+							Email
+							<input type="text" name="email" id="qemail">
+							<p id="required_email">Required</p>
+						</form> 
 						<br><br>
-						<input type="button" value="Back" class="bbutton">
-						<input type="button" value="Send" class="nbutton">
+						<input type="button" id="buttons" value="Back" class="bbutton">
+						<input type="button" id="buttons" value="Send" class="nbutton">
 					</div>
 					<div class="q22" style="display:none;">
 						<br><br><br>

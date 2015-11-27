@@ -29,38 +29,37 @@ var best_kind_of_ads = "";
 var survey_data = [
 {name: "survey_id", value: 0},
 {name: "session_id", value: 0},
-{name: "notice_display", value: null},
-{name: "content_screen", value: ""},
-{name: "realize_ads", value: null},
-{name: "rating_feelings", value: 0},
-{name: "number_of_ads", value: 0},
-{name: "ad_content", value: ""},
-{name: "ads_interesting", value: null},
-{name: "cause_interest", value: ""},
-{name: "ads_attention", value: null},
-{name: "might_buy", value: null},
-{name: "ads_attention_general", value: null},
-{name: "public_displays_suited", value: null},
-{name: "kind_of_ad", value: ""},
-{name: "remember_ad", value: null},
-{name: "focus", value: ""},
-{name: "affect_interaction", value: ""},
-{name: "stop_motivation", value: ""},
-{name: "our_location_suitable", value: null},
-{name: "suitable_location", value: ""},
-{name: "feeling_sounds", value: ""},
-{name: "best_kind_of_ads", value: ""}
+{name: "age", value: 0},
+{name: "gender", value: ""},
+{name: "what_was_on_the_screen", value: ""},
+{name: "did_it_raise_positive_or_negative_emotions", value: 0},
+{name: "how_many_ads_did_you_see", value: 0},
+{name: "describe_the_ads_you_saw", value: ""},
+{name: "did_any_of_ads_gain_intrest", value: ""},
+{name: "did_ads_annoy_why", value: ""},
+{name: "ads_gained_attention", value: 0},
+{name: "found_ads_interesting", value: 0},
+{name: "might_buy", value: 0},
+{name: "disp_better_than_printed_ad", value: 0},
+{name: "disp_better_than_television_ad", value: 0},
+{name: "disp_ads_annoy_me", value: 0},
+{name: "pay_attention_to_ads", value: 0},
+{name: "often_buy_products_on_ads", value: 0},
+{name: "pub_disp_suited_for_ads", value: 0},
+{name: "where_else_seen_public_displays", value: ""},
+{name: "remember_seeing_ads_on_pub_disp", value: ""},
+{name: "seen_pub_disp_for_other_than_ads", value: ""},
 ];
 
 //idle variables
-var timer = 30000;
+var timer = 160000;
 var timeoutId = null;
 var idlePage = "index.html";
 var survey_sent = false;
 
 //Question page:
 var curr_page = 0;
-var pages = [".q1", ".q2", ".q3", ".q4", ".q5", ".q6", ".q7"];
+var pages = [".q1", ".q2", ".q3", ".q4", ".q5", ".q6",".q7",".q8", ".q9", ".q10", ".q11", ".q12", ".q13",".q14",".q15",".q16", ".q17", ".q18", ".q19", ".q20", ".q21",".q22"];
 
 function getRightNow() {
   var today = new Date();
@@ -102,7 +101,7 @@ function loadNextPage() {
 		return false;
 	}
 
-	if (curr_page < pages.length-1) {
+	if (curr_page < pages.length-2) {
 		if ($("#button1").is(":visible")) {
 			if (!$("#qname").val()) {
 				$("#required_name").css("visibility", "visible");

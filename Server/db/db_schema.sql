@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS survey_data
 	pub_disp_suited_for_ads INTEGER,
 	where_else_seen_public_displays TEXT,
 	remember_seeing_ads_on_pub_disp TEXT,
-	seen_pub_disp_for_other_than_ads TEXT		
+	seen_pub_disp_for_other_than_ads TEXT	
 );
 COMMIT;
 PRAGMA foreign_keys=OFF;
