@@ -15,7 +15,6 @@
   	</head>
   	<body onMouseMove="resetTimer()">
   		<div id="content">
-  		
 			<div id="content-left">
 				<div id="ad">
 					<div class="img_content">
@@ -28,15 +27,17 @@
 						</video>
 					</div>
 				</div>
-	
+				<div id="map_container">
 				<div onMouseDown="startMapMove()" onMouseUp="endMapMove()" onMouseMove="moveMap()" id="map"></div>
+				</div>
 			</div>
 
 			<div id="content-right">
 				<div id="quiz">
+					<object id ="quiz_obj" type="text/html"data="http://gow2.simohosio.com/entry.php">
+					</object>
 				</div>
 				<!-- TEMPORARY - EDIT WHEN THE SURVEY IS INTEGRATED!-->
-				<a id="pinlink" href="#" style="color:#ffffff">GETCODE</a>
 				<div id="pin">
 					<h1>Your pincode:</h1>
 					<p id="waitcode">Generating code...</p>
