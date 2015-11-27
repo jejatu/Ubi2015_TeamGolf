@@ -32,8 +32,8 @@
 							<p class="q_label">How old are you?</p>
 							<p class="q_text">Select your age by using the slider below</p>
 							<p class="q_text">Press 'next' after to continue to next question</p>
-							<div class="q_label"> Age:
-							<output id="ageOutput" for="age" class="q_text" style="position:absolute;top:33%;width:2%;text-align:center;">?</output>
+							<div class="slider"> Age:
+							<output id="ageOutput" for="age" class="q_text">?</output>
 							</div>
 							<p class="q_label">
 							<input name="age" id="age" type=range min=15 max=75 step=1 style="width:75%; height:5%" onchange=updateAge(this.value)>
@@ -91,8 +91,8 @@
 						<p class="q_label">The display in question showed advertisement. How many ads did you see?</p>
 						<p class="q_text">Select how many ads did you saw by using the slider below</p>
 						<p class="q_text">Press 'next' after to continue to next question</p>
-						<div class="q_label"> Ads seen:
-							<output id="ads_output" for="ads" class="q_text" style="position:absolute;top:33%;width:2%;text-align:center;">0</output>
+						<div class="slider"> Ads seen:
+							<output id="ads_output" for="ads" class="q_text">0</output>
 						</div>
 						<p class="q_label">
 							<input name="how_many_ads_did_you_see" id="ads" type=range min=1 max=30 step=1 style="width:35%; height:5%" onchange=updateValue(this.value)>
