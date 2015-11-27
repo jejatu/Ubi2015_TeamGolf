@@ -46,7 +46,12 @@ header img {
 	font-size: 20;
 }
 
-
+#slider{
+	position:absolute;
+	top:33%;
+	width:2%;
+	text-align:center;
+}
 
 
 #required_name, #required_email {
