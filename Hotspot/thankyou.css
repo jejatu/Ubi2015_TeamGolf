@@ -1,0 +1,56 @@
+body {
+  	background-color: #aaddff;
+  	margin: 0;
+  	padding: 0;
+  	font-family: Arial, Helvetica, sans-serif;
+	color: #1133aa;
+	height: 100%;
+}
+
+#ty_header {
+	background-color: #88aacc;
+	text-align: center;
+	padding: 20 20;
+	margin: 0;
+}
+
+
+#ty_header h1 {
+	padding: 0;
+	margin: 0;
+}
+
+#ty_content {
+	text-align: center;
+}
+
+#pin h1 {
+	padding: 0;
+	margin: 0;
+}
+
+#code p {
+	color: #dd9977;
+	font-size: 3em;
+	font-weight: bold;
+	border: 1px solid #1133aa;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+#codeButton {
+	height: auto;
+	background-color: #1133aa;
+	color: #ffffff;
+	margin: 0 30% 0 30%;
+	padding: 0;
+	cursor: pointer;
+}
+
+#codeButton p {
+	padding: 0;
+	margin: 0;
+	font-size: 2em;
+	font-weight: bold;
+	
+}

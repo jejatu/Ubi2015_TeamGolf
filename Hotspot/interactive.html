@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<meta charset="UTF-8">
     	<link rel="stylesheet" type="text/css" href="hotspot.css" />
     	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
     	<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
@@ -13,7 +14,7 @@
       		}
     	</script>
   	</head>
-  	<body onMouseMove="resetTimer()">
+  	<body onMouseMove="resetTimer()" onKeyPress="resetTimer()">
   		<div id="content">
   		
 			<div id="content-left">
@@ -21,6 +22,7 @@
 					<div class="img_content">
 						<img id="image2" />
 					</div>
+					
 					<div class="video_content">
 						<video id="video">
 							<source src="ads/video1.webm" type="video/webm" id="webm_src"></source>
@@ -33,20 +35,10 @@
 			</div>
 
 			<div id="content-right">
-				<div id="quiz">
-				</div>
-				<!-- TEMPORARY - EDIT WHEN THE SURVEY IS INTEGRATED!-->
-				<a id="pinlink" href="#" style="color:#ffffff">GETCODE</a>
-				<div id="pin">
-					<h1>Your pincode:</h1>
-					<p id="waitcode">Generating code...</p>
-					<div id="code"></div>
-					<input id="codeButton" type="button" value="OK" onclick="endSession();" style="display:none;" />
-				</div>
+				<iframe id="survey_iframe" name="survey_iframe" src="http://gow2.simohosio.com/entry.php">
+				</iframe>
 			</div>
 		</div>
-    	
-    	
     	<script src="map.js"></script>
     </body>
 </html>

@@ -12,7 +12,7 @@ var typeOfAd = "";
 var contentAd = "";
 
 //idle variables
-var timer = 30000;
+var timer = 60000;
 var timeoutId = null;
 var idlePage = "index.html";
 
@@ -66,25 +66,14 @@ function startSession() {
 	startTimer();
 	startTime = new Date().getTime();
 	
-	getInvalidCodes();
+	setSessionCode();
 	
-	if (invalid_codes.length > 0) {
-		do {
-			generateCode();
+	if (DEBUG) {
+			console.log("Started a new session at " + getRightNow());
 		}
-		while ($.inArray(code, invalid_codes) != -1);
-	}
-	else {
-		generateCode();
-	}
-	$("#waitcode").hide();
-	var code_div = document.getElementById("code");
-	code_div.innerHTML = "<p>" + code + "</p>";
-	$("#codeButton").show()
-	console.log("Started a new session at " + getRightNow() + " with a code: " + code);
 }
 
-function getInvalidCodes() {
+function setSessionCode() {
 	var successCb = function(data, textStatus, jqXHR) {
 		if (DEBUG) {
 			console.log("RECEIVED RESPONSE: data: ", data, ", textStatus: ", textStatus);
@@ -94,6 +83,23 @@ function getInvalidCodes() {
 		for (var i = 0; i < items; i++)
 		{
 			invalid_codes.push((items[i].code).toString());
+		}
+		
+		var _code = "";
+		if (invalid_codes.length > 0) {
+			do {
+				_code = generateCode();
+			}
+			while ($.inArray(code, invalid_codes) != -1);
+		}
+		else {
+			_code = generateCode();
+		}
+		
+		code = _code;
+		
+		if (DEBUG) {
+			console.log("Session pincode: ", code);
 		}
 	};
 	
@@ -116,11 +122,18 @@ function generateCode() {
 	else if (randomCode < 100) {
 	return "0" + randomCode;
 	}
-	code = randomCode.toString();
+	return randomCode.toString();
 }
 
 function getCode() {
 	return code;
+}
+
+function showCode() {
+	var iframe = window.frames["survey_iframe"];
+	$("#survey_iframe").contents().find("#waitcode").hide();
+	iframe.document.getElementById("code").innerHTML = "<p>" + "123" + "</p>";
+	$("#survey_iframe").contents().find("#codeButton").show();
 }
 
 function sendSession() {
@@ -169,11 +182,3 @@ function resetTimer() {
 function executeTimer() {
   endSession();
 }
-
-$(function() {
-	$("#pinlink").on("click", function() {
-		$("#pin").show();
-		$("#pinlink").hide();
-		return false;
-	});
-})

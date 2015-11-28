@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="thankyou.css" />
+    	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    	<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+    	<script type="text/javascript">
+    		window.onload = function() {
+    			parent.showCode();
+    		}
+    	</script>
+	</head>
+	<body>
+		<div id="ty_header">
+			<h1>Kiitos! Thank you!</h1>
+		</div>
+		<div id="ty_content">
+			<div id="pin_guide">
+				<p>Käytä allaolevaa koodia läheisellä kyselypisteellä osallistuaksesi leffalippupakettien arvontaan.</p>
+				<p>Use the code below in a nearby kiosk to get a chance to win a pair of movie tickets.</p>
+			</div>
+			<div id="pin">
+				<br>
+				<h1>Pin-koodisi: Your pincode:</h1>
+				<p id="waitcode">Generating code...</p>
+				<div id="code"></div>
+				<div id="codeButton" onclick="endSession();" style="display:none;">
+					<p>OK</p>
+				</div>
+				<!-- <input id="codeButton" type="button" value="OK" onclick="returnIdle();" style="display:none;" /> -->
+			</div>
+		</div>
+	</body>
+</html>
