@@ -97,6 +97,7 @@ function setSessionCode() {
 		}
 		
 		code = _code;
+		sessionStorage.setItem("code", code);
 		
 		if (DEBUG) {
 			console.log("Session pincode: ", code);
@@ -130,9 +131,9 @@ function getCode() {
 }
 
 function showCode() {
-	var iframe = window.frames["survey_iframe"];
+	console.log("bra");
 	$("#survey_iframe").contents().find("#waitcode").hide();
-	iframe.document.getElementById("code").innerHTML = "<p>" + "123" + "</p>";
+	$("#survey_iframe").contents().find("#code").html("<p>" + code + "</p>");
 	$("#survey_iframe").contents().find("#codeButton").show();
 }
 

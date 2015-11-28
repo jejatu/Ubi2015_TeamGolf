@@ -5,7 +5,15 @@
     	<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
     	<script type="text/javascript">
     		window.onload = function() {
-    			parent.showCode();
+    			function checkCode() {
+    				if (sessionStorage.getItem("code") !== null) {
+    					$("#waitcode").hide();
+    					$("#codeButton").show();
+    					$("#code").html("<p>" + sessionStorage.getItem("code") + "</p>");
+    				}
+    			}
+    			
+    			setTimeout(checkCode, 500);
     		}
     	</script>
 	</head>
@@ -23,10 +31,9 @@
 				<h1>Pin-koodisi: Your pincode:</h1>
 				<p id="waitcode">Generating code...</p>
 				<div id="code"></div>
-				<div id="codeButton" onclick="endSession();" style="display:none;">
+				<div id="codeButton" onclick="parent.endSession()" style="display:none;">
 					<p>OK</p>
 				</div>
-				<!-- <input id="codeButton" type="button" value="OK" onclick="returnIdle();" style="display:none;" /> -->
 			</div>
 		</div>
 	</body>
