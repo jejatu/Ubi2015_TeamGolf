@@ -52,7 +52,7 @@ var survey_data = [
 ];
 
 //idle variables
-var timer = 160000;
+var timer = 1600000;
 var timeoutId = null;
 var idlePage = "index.html";
 var survey_sent = false;
