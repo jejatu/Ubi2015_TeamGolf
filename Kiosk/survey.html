@@ -5,341 +5,500 @@
 		<link rel='stylesheet' href='survey.css'>
 		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="apiclient.js"></script>
 		<script src="survey_session.js"></script>
 		<script src="updateAge.js"></script>
 		<script src="updateValue.js"></script>
+    	<script type="text/javascript">
+    		window.onload = function() {
+				$("*[lang|='fi']").hide();
+      		}
+    	</script>
+		<script>
+		$(document).ready(function(){
+			$("#image_f").click(function(){
+				$("*[lang|='en']").hide();
+				$("*[lang|='fi']").show();
+			});
+			$("#image_e").click(function(){
+				$("*[lang|='fi']").hide();
+				$("*[lang|='en']").show();
+			});
+		});
+		</script>
 	</head>
 	<body>
 		<header>
-			<div id="eng_header">
+			<div lang="en" id="english_lang">
 				<h1>Questionnaire</h1>
 			</div>
-			<div id="fin_header" style="display:none;">
+			<div lang="fi" id="finnish_lang" style="display:none">
 				<h1>Kyselylomake</h1>
 			</div>
-			<img src="fin_flag.png">
-			<img src="uk_flag.png">
+			<a lang = "en"><input type="image" id ="image_f" src="fin_flag.png" width="140" height="78"></a>
+			<a lang ="fi"><input type="image" id ="image_e" src="uk_flag.png" width="140" height="78"></a>
 		</header>
 		<div id="content">
 			<div id="eng">
 				<div class="q1" id="eng_welcome">
-					<h2>Great! Let's start!</h2>
+					<h2 lang="en">Great! Let's start!</h2>
+				</div>
+				<div class="q1" id="fin_welcome">
+					<h2 lang="fi">Hienoa aloitetaan!</h2>
 				</div>
 				<div id="questions">
 					<form id="form_eng">
 					<div class="q1">
-							<p class="q_label">How old are you?</p>
-							<p class="q_text">Select your age by using the slider below</p>
-							<p class="q_text">Press 'next' to continue to next question</p>
-							<div class="slider"> Age:
-							<output id="ageOutput" for="age" class="q_text">?</output>
-							</div>
+							<p lang="en" class="q_label">How old are you?</p>
+							<p lang="fi" class="q_label">Kuinka vanha olet?</p>
+							<p lang="en" class="q_text">Select your age by using the slider below</p>
+							<p lang="fi" class="q_text">Valitse ikäsi käyttämällä alla olevaa liukusäädintä</p>
+							<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+							<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
+							<div class="slider"></div><a lang="en">Age:</a><a lang="fi">Ikä:</a>
+							<output id="ageOutput" for="age" class="q_text">45</output>
 							<p class="q_label">
 							<input name="age" id="age" type=range min=15 max=75 step=1 style="width:55%; height:5%" onchange=updateAge(this.value)>
 							</p>
 							<br></br>
-							<input type="button" id="buttons" value="Back" class="bbutton">
-							<input type="button" id="buttons" value="Next" class="nbutton">
+							<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+							<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+							<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+							<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
+							
+						<!--	<p lang="fi" class="q_text">Valitse ikäsi käyttämällä alla olevaa liukusäädintä</p>
+							<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
+							<div lang="fi" class="slider"> Ikä:
+							</div>
+							<p class="q_label">
+							</p>
+							<br></br>
+							<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+							<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton"> -->
 					</div>
 					
 					<div class="q2" style="display:none;">
-						<h2>Okay!</h2>
-						<p class="q_label">Choose your gender</p>
-						<p class="q_text">Please select your gender on options below</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="en">Okay!</h2>
+						<h2 lang ="fi">Selvä!</h2>
+						<p lang="en" class="q_label">Choose your gender</p>
+						<p lang="en" class="q_text">Please select your gender on options below</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<p lang="fi" lang="fi" class="q_label">Kerro ensiksi sukupuolesi:</p>
+						<p lang="fi" lang="fi" class="q_text">Ole hyvä ja valitse sukupuolesi alla olevista vaihtoehdoista:</p>
+						<p lang="fi" lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<br></br>
-						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Male">Male
-						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Famle">Female
-						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Other">Other
+						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Male"><a lang="en">Male</a><a lang="fi">Mies</a>
+						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Famle"><a lang="en">Female</a><a lang="fi">Nainen</a>
+						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Other"><a lang="en">Other</a><a lang="fi">Muu</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 						
 						
 					<div class="q3" style="display:none;">
-						<h2>Ok! Next question (1/18):</h2>
-						<p class="q_label">Before you came to answer this questionare, you used a public display.</p>
-						<p class="q_label">Please describe briefly what was shown on the screen (Touch text field below to insert text)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="en">Ok! Next question (1/18):</h2>
+						<p lang="en" class="q_label">Before you came to answer this questionare, you used a public display.</p>
+						<p lang="en" class="q_label">Please describe briefly what was shown on the screen (Touch text field below to insert text)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Ok! Seuraava kysymys (1/18):</h2>
+						<p lang="fi" class="q_label">Ennen kun tulit täyttämään tätä kyselyä, käytit julkista näyttöä.</p>
+						<p lang="fi" class="q_label">Kerro omin sanoin mitä näytöllä näkyi (kosketa alla olevaa tekstikenttää kirjoittaaksesi)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<textarea rows=4 cols=50 id="what_was_on_the_screen" name="what_was_on_the_screen" class="text_answer" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava"  lang="fi" class="nbutton">
 					</div>	
 					<div class="q4" style="display:none;">
-						<h2>Okay! Next question (2/18):</h2>
-						<p class="q_label">Did the display raise positive or negative emotions or feelings in you?</p>
-						<p class="q_label">Use the scale below to tell your opinion in scale 1(very negative) - 7(very positive)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="en">Okay! Next question (2/18):</h2>
+						<p lang="en" class="q_label">Did the display raise positive or negative emotions or feelings in you?</p>
+						<p lang="en" class="q_label">Use the scale below to tell your opinion in scale 1(very negative) - 7(very positive)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Selvä! Seuraava kysymys (2/18):</h2>
+						<p lang="fi" class="q_label">Herättikö näyttö sinussa positiivisia vai negatiivisia tunteita?</p>
+						<p lang="fi" class="q_label">Käytä alla olevia valintoja ja kerro mielipiteesi asteikolla 1 (erittäin negatiivisia) - 7 (erittäin positiivisia)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<br></br>
-						negative<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="1">
+						<a lang="en">very negative</a><a lang="fi">Erittäin negatiivisia</a><input type="radio" name="did_it_raise_positive_or_negative_emotions" lang="en" class="did_it_raise_positive_or_negative_emotions" value="1">
 						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="2">
 						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="3">
 						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="4">
 						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="5">
 						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="6">
-						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="7">positive
+						<input type="radio" name="did_it_raise_positive_or_negative_emotions" class="did_it_raise_positive_or_negative_emotions" value="7"><a lang="en">very positive</a><a lang="fi">Erittäin positiivisia</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					
 					<div class="q5" style="display:none;">
-						<h2>Ok! Next question (3/18):</h2>
-						<p class="q_label">The display in question showed advertisement. How many ads did you see?</p>
-						<p class="q_text">Select how many ads did you saw by using the slider below</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
-						<div class="slider"> Ads seen:
-							<output id="ads_output" for="ads" class="q_text">0</output>
+						<h2 lang="en">Ok! Next question (3/18):</h2>
+						<p lang="en" class="q_label">The display in question showed advertisement. How many ads did you see?</p>
+						<p lang="en" class="q_text">Select how many ads did you saw by using the slider below</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Ok! Seuraava kysymys (3/18):</h2>
+						<p lang="fi" class="q_label">Käyttämälläsi näytöllä näkyi mainoksia.</p>
+						<p lang="fi" class="q_text">Montako eri mainosta muistat nähneesi? Valitse käyttäen alla olevaa liukusäädintä </p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
+						<div class="slider"><a lang="en"> Ads seen:</a><a lang="fi">Mainosta nähty:</a>
+							<output id="ads_output" for="ads" class="q_text">7</output>
 						</div>
 						<p class="q_label">
-							<input name="how_many_ads_did_you_see" id="ads" type=range min=1 max=30 step=1 style="width:35%; height:5%" onchange=updateValue(this.value)>
+							<input name="how_many_ads_did_you_see" id="ads" type=range min=1 max=15 step=1 style="width:35%; height:5%" onchange=updateValue(this.value)>
 						</p>
 						<br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					
 					<div class="q6" style="display:none;">
-						<h2>Great! Next question (4/18):</h2>
-						<p class="q_label">What advertisement do you remember seeing?</p>
-						<p class="q_label">Please describe briefly the ads you saw (Touch text field below to insert text)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="en">Great! Next question (4/18):</h2>
+						<p lang="en" class="q_label">What advertisement do you remember seeing?</p>
+						<p lang="en" class="q_label">Please describe briefly the ads you saw (Touch text field below to insert text)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Mahtavaa! Seuraava kysymys (4/18):</h2>
+						<p lang="fi" class="q_label">Mitä mainoksia muistat nähneesi?</p>
+						<p lang="fi" class="q_label">Kuvaile näkemiäsi mainoksia omin sanoin. Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<textarea rows=4 cols=50 id="describe_the_ads_you_saw" name="describe_the_ads_you_saw" class="text_answer2" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q7" style="display:none;">
-						<h2>Ok! Next question (5/18):</h2>
-						<p class="q_label">Did any of the shown ads gain your interest? How?</p>
-						<p class="q_label">Please describe if some ad stuck to your mind or woke up your intrest(Touch text field below to insert text)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="en">Ok! Next question (5/18):</h2>
+						<p lang="en" class="q_label">Did any of the shown ads gain your interest? How?</p>
+						<p lang="en" class="q_label">Please describe if some particular ad gained your interest(Touch text field below to insert text)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Ok! Seuraava kysymys (5/18):</h2>
+						<p lang="fi" class="q_label">Herättikö mikään mainos mielenkiintosi?</p>
+						<p lang="fi" class="q_label">Ole hyvä ja kerro mikäli joku mainos jäi mieleen tai herätti mielenkiintosi. Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<textarea rows=4 cols=50 id="did_any_of_ads_gain_intrest" name="did_any_of_ads_gain_intrest" class="text_answer3" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q8" style="display:none;">
-						<h2>Great! Next question (6/18):</h2>
-						<p class="q_label">Did you feel annoyed by any of the ads? Why?</p>
-						<p class="q_label">Please describe if some ad annoyed you or otherwise attracted negative emotions in you(Touch text field below to insert text)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="en">Great! Next question (6/18):</h2>
+						<p lang="en" class="q_label">Did you feel annoyed by any of the ads? Why?</p>
+						<p lang="en" class="q_label">Please describe if some ad annoyed you or otherwise attracted negative emotions in you(Touch text field below to insert text)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Hienoa! Seuraava kysymys (6/18):</h2>
+						<p lang="fi" class="q_label">Ärsyttikö joku mainos sinua?</p>
+						<p lang="fi" class="q_label">Ole hyvä ja kerro mikäli joku mainos ärsytti tai herätti muuten negatiivisia tunteita sinussa. Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<textarea rows=4 cols=50 id="did_ads_annoy_why" name="did_ads_annoy_why" class="text_answer4" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q9" style="display:none;">
-						<h2>Okay! Next question (7/18):</h2>
-						<p class="q_label">The ads shown on the display gained my attention:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Okay! Next question (7/18):</h2>
+						<p lang="en" class="q_label">The ads shown on the display gained my attention:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="fi">Selvä! Seuraava kysymys (7/18):</h2>
+						<p lang="fi" class="q_label">Näytöllä näkyvät mainokset herättivät huomioni:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = täysin eri mieltä, 7 = täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<br></br>
-						Fully disagree<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="1">
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="1">
 						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="2">
 						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="3">
 						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="4">
 						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="5">
 						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="6">
-						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="7">Fully agree
+						<input type="radio" name="ads_gained_attention" class="ads_gained_attention" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q10" style="display:none;">
-						<h2>Great! Next question (8/18):</h2>
-						<p class="q_label">I found the ads shown on the display to be interesting:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Great! Next question (8/18):</h2>
+						<p lang="en" class="q_label">I found the ads shown on the display to be interesting:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="fi">Selvä! Seuraava kysymys (8/18):</h2>
+						<p lang="fi" class="q_label">Näytöllä näkyvät mainokset olivat minusta kiinnostavia:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>	
 						<br></br>
-						Fully disagree<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="1">
-						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="2">
-						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="3">
-						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="4">
-						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="5">
-						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="6">
-						<input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="7">Fully agree
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a></a><input type="radio" name="found_ads_interesting" class="found_ads_interesting" value="1">
+						<input type="radio" name="found_ads_interesting"  class="found_ads_interesting" value="2">
+						<input type="radio" name="found_ads_interesting"  class="found_ads_interesting" value="3">
+						<input type="radio" name="found_ads_interesting"  class="found_ads_interesting" value="4">
+						<input type="radio" name="found_ads_interesting"  class="found_ads_interesting" value="5">
+						<input type="radio" name="found_ads_interesting"  class="found_ads_interesting" value="6">
+						<input type="radio" name="found_ads_interesting"  class="found_ads_interesting" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q11" style="display:none;">
-						<h2>Ok! Next question (9/18):</h2>
-						<p class="q_label">I might buy a product based on an ad I saw on the display:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Ok! Next question (9/18):</h2>
+						<p lang="en" class="q_label">I might buy a product based on an ad I saw on the display:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="fi">Ok! Seuraava kysymys (9/18):</h2>
+						<p lang="fi" class="q_label">Saattaisin ostaa tuotteen näytöllä näkemäni mainoksen perusteella:</p>
+												<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<br></br>
-						Fully disagree<input type="radio" name="might_buy" class="might_buy" value="1">
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="might_buy" class="might_buy" value="1">
 						<input type="radio" name="might_buy" class="might_buy" value="2">
 						<input type="radio" name="might_buy" class="might_buy" value="3">
 						<input type="radio" name="might_buy" class="might_buy" value="4">
 						<input type="radio" name="might_buy" class="might_buy" value="5">
 						<input type="radio" name="might_buy" class="might_buy" value="6">
-						<input type="radio" name="might_buy" class="might_buy" value="7">Fully agree
+						<input type="radio" name="might_buy" class="might_buy" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+					    <input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q12" style="display:none;">
-						<h2>Awesome! Next question (10/18):</h2>
-						<p class="q_label">An ad shown on a public display works better for me than a printed ad:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Awesome! Next question (10/18):</h2>
+						<p lang="en" class="q_label">An ad shown on a public display works better for me than a printed ad:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="fi">Selvä! Seuraava kysymys (10/18):</h2>
+						<p lang="fi" class="q_label">Julkisella näytöllä esitetty mainos tehoaa minuun paremmin kuin painettu mainos:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>	
 						<br></br>
-						Fully disagree<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="1">
-						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="2">
-						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="3">
-						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="4">
-						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="5">
-						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="6">
-						<input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="7">Fully agree
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="disp_better_than_printed_ad" class="disp_better_than_printed_ad" value="1">
+						<input type="radio" name="disp_better_than_printed_ad"  class="disp_better_than_printed_ad" value="2">
+						<input type="radio" name="disp_better_than_printed_ad"  class="disp_better_than_printed_ad" value="3">
+						<input type="radio" name="disp_better_than_printed_ad"  class="disp_better_than_printed_ad" value="4">
+						<input type="radio" name="disp_better_than_printed_ad"  class="disp_better_than_printed_ad" value="5">
+						<input type="radio" name="disp_better_than_printed_ad"  class="disp_better_than_printed_ad" value="6">
+						<input type="radio" name="disp_better_than_printed_ad"  class="disp_better_than_printed_ad" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q13" style="display:none;">
-						<h2>Okay! Next question (11/18):</h2>
-						<p class="q_label">An ad shown on a public display works better for me than an ad on television:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Okay! Next question (11/18):</h2>
+						<p lang="en" class="q_label">An ad shown on a public display works better for me than an ad on television:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Selvä! Seuraava kysymys (11/18):</h2>
+						<p lang="fi" class="q_label">Julkisella näytöllä esitetty mainos tehoaa minuun paremmin kuin tv-mainos:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>							
 						<br></br>
-						Fully disagree<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="1">
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="1">
 						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="2">
 						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="3">
 						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="4">
 						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="5">
 						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="6">
-						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="7">Fully agree
+						<input type="radio" name="disp_better_than_television_ad" class="disp_better_than_television_ad" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q14" style="display:none;">
-						<h2>Ok! Next question (12/18):</h2>
-						<p class="q_label">Ads on public displays are annoying:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Ok! Next question (12/18):</h2>
+						<p lang="en" class="q_label">Ads on public displays are annoying:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="fi">Ok! Seuraava kysymys (12/18):</h2>
+						<p lang="fi" class="q_label">Julkisella näytöllä esitetyt mainokset ovat ärsyttäviä:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>	
 						<br></br>
-						Fully disagree<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="1">
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="1">
 						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="2">
 						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="3">
 						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="4">
 						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="5">
 						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="6">
-						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="7">Fully agree
+						<input type="radio" name="disp_ads_annoy_me" class="disp_ads_annoy_me" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q15" style="display:none;">
-						<h2>Okay! Next question (13/18):</h2>
-						<p class="q_label">I usually pay attention to advertisement:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Okay! Next question (13/18):</h2>
+						<p lang="en" class="q_label">I usually pay attention to advertisement:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Mahtavaa! Seuraava kysymys (13/18):</h2>
+						<p lang="fi" class="q_label">Kiinnitän yleensä huomiota mainoksiin:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>							
 						<br></br>
-						Fully disagree<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="1">
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="1">
 						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="2">
 						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="3">
 						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="4">
 						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="5">
 						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="6">
-						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="7">Fully agree
+						<input type="radio" name="pay_attention_to_ads" class="pay_attention_to_ads" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q16" style="display:none;">
-						<h2>Great! Next question (14/18):</h2>
-						<p class="q_label">I often buy products based on ads I’ve seen:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next'to continue to next question</p>	
+						<h2 lang="en">Great! Next question (14/18):</h2>
+						<p lang="en" class="q_label">I often buy products based on ads I’ve seen:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next'to continue to next question</p>	
+						<h2 lang="fi">Hienoa! Seuraava kysymys (14/18):</h2>
+						<p lang="fi" class="q_label">Ostan usein tuotteita näkemieni mainosten perusteella:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Press 'next'to continue to Seuraava kysymys</p>	
 						<br></br>
-						Fully disagree<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="1">
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="1">
 						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="2">
 						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="3">
 						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="4">
 						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="5">
 						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="6">
-						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="7">Fully agree
+						<input type="radio" name="often_buy_products_on_ads" class="often_buy_products_on_ads" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q17" style="display:none;">
-						<h2>Great! Next question (15/18):</h2>
-						<p class="q_label">I think public displays are well suited for advertisement purposes:</p>
-						<p class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>	
+						<h2 lang="en">Great! Next question (15/18):</h2>
+						<p lang="en" class="q_label">I think public displays are well suited for advertisement purposes:</p>
+						<p lang="en" class="q_label">Answer the above claim in scale 1(Fully disagree) - 7(Fully agree)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Hienoa! Seuraava kysymys (15/18):</h2>
+						<p lang="fi" class="q_label">Mielestäni julkiset näytöt soveltuvat hyvin mainostamiseen:</p>
+						<p lang="fi" class="q_label">Vastaa yllä esitettyyn väittämään asteikolla 1-7 (1 = Täysin eri mieltä, 7 = Täysin samaa mieltä)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>							
 						<br></br>
-						Fully disagree<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="1">
+						<a lang="en">Fully disagree</a><a lang="fi">Täysin eri mieltä</a><input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="1">
 						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="2">
 						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="3">
 						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="4">
 						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="5">
 						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="6">
-						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="7">Fully agree
+						<input type="radio" name="pub_disp_suited_for_ads" class="pub_disp_suited_for_ads" value="7"><a lang="en">Fully agree</a><a lang="fi">Täysin samaa mieltä</a>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q18" style="display:none;">
-						<h2>Almost there! Next question (16/18):</h2>
-						<p class="q_label">Where else do you remember seeing public displays?</p>
-						<p class="q_label">Please describe places you remember seeing public displays.(Touch text field below to insert text)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="en">Almost there! (16/18):</h2>
+						<p lang="en" class="q_label">Where else do you remember seeing public displays?</p>
+						<p lang="en" class="q_label">Please describe places you remember seeing public displays.(Touch text field below to insert text)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Loppu häämöttää! (16/18):</h2>
+						<p lang="fi" class="q_label">Missä muualla muistat nähneesi julkisia näyttöjä?</p>
+						<p lang="fi" class="q_label">Please describe places you remember seeing public displays.(Touch text field below to insert text)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<textarea rows=4 cols=50 id="where_else_seen_public_displays" name="where_else_seen_public_displays" class="text_answer5" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q19" style="display:none;">
-						<h2>Great! Next question (17/18):</h2>
-						<p class="q_label">Do you remember seeing advertisement on these public displays?</p>
-						<p class="q_label">Do you recall any ad in particular that you’ve seen on a public display? If yes, please describe the ad in question(Touch text field below to insert text)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
-						<textarea rows=4 cols=50 id="remember_seeing_ads_on_pub_disp" name="remember_seeing_ads_on_pub_disp" class="text_answer5" placeholder="Write here"></textarea>
+						<h2 lang="en">Great! Next question (17/18):</h2>
+						<p lang="en" class="q_label">Do you remember seeing advertisement on these public displays?</p>
+						<p lang="en" class="q_label">Do you recall any ad in particular that you’ve seen on a public display? If yes, please describe the ad in question(Touch text field below to insert text)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<h2 lang="fi">Hienoa! Seuraava kysymys (17/18):</h2>
+						<p lang="fi" class="q_label">Muistatko nähneesi mainoksia julkisilla näytöillä?</p>
+						<p lang="fi" class="q_label">Onko joku mainos jäänyt erityisesti mieleesi? Miksi? Kirjoita koskettamalla alla olevaa tekstikenttää.)</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
+						<textarea rows=4 cols=50 id="remember_seeing_ads_on_pub_disp" name="remember_seeing_ads_on_pub_disp" class="text_answer6" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					<div class="q20" style="display:none;">
-						<h2>Good! Last question (18/18):</h2>
-						<p class="q_label">Do you remember seeing public displays that were used for something other than advertising?</p>
-						<p class="q_label">If yes, please describe the display you’ve seen (purpose, location, etc.)(Touch text field below to insert text)</p>
-						<p class="q_text">Press 'next' to continue to next question</p>
-						<textarea rows=4 cols=50 id="seen_pub_disp_for_other_than_ads" name="seen_pub_disp_for_other_than_ads" class="text_answer5" placeholder="Write here"></textarea>
+						<h2 lang="en">Good! Last question (18/18):</h2>
+						<p lang="en" class="q_label">Do you remember seeing public displays that were used for something other than advertising?</p>
+						<p lang="en" class="q_label">If yes, please describe the display you’ve seen (purpose, location, etc.)(Touch text field below to insert text)</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<div class="q20" style="display:none;">
+						<h2 lang="fi">Hyvä! Viimeinen kysymys (18/18):</h2>
+						<p lang="fi" class="q_label">Muistatko nähneesi julkisia näyttöjä joita käytetään muuhun kuin mainostamiseen?</p>
+						<p lang="fi" class="q_label">Ole hyvä ja kuvaile näkemääsi julkista näyttöä (tarjoitus, sijainti, jne). Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
+						<textarea rows=4 cols=50 id="seen_pub_disp_for_other_than_ads" name="seen_pub_disp_for_other_than_ads" class="text_answer7" placeholder="Write here"></textarea>
 						<br></br><br></br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Next" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 
 					<div class="q21" style ="display:none;">
-						<h2>Thank you for your time!</h2>
-						<p class="q_text">Please fill your contact information if you wish to participate in movie ticket lottery.</p>
-						<p class="q_text">Drawing will be conducted among respondents in February, 2016 </p>
-						<p class="q_text">Winners will be notified personally.</p>
-						<p class="q_text">Finish the questionnaire by pressing the 'Send' button.
+						<h2 lang="en">Thank you for your time!</h2>
+						<p lang="en" class="q_text">Please fill your contact information if you wish to participate in movie ticket lottery.</p>
+						<p lang="en" class="q_text">Drawing will be conducted among respondents in February, 2016 </p>
+						<p lang="en" class="q_text">Winners will be notified personally.</p>
+						<p lang="en" class="q_text">Finish the questionnaire by pressing the 'Send' button.
+						<h2 lang="fi">Kiitos vastauksistasi!</h2>
+						<p lang="fi" class="q_text">Jätä sähköpostiosoitteesi mikäli haluat osallistua leffalippujen arvontaan</p>
+						<p lang="fi" class="q_text">Arvonta suoritetaan vastanneiden kesken helmikuussa 2016. Voittajille ilmoitetaan henkilökohtaisesti.</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'valmis' päättääksesi kyselyn.
 						<br>
 						<br>
 						<form>
-							Name
+							<a lang ="en">Name</a><a lang="fi">Nimi</a>
 							<input type="text" name="name" id="qname">
 							<p id="required_name">Required</p>
-							Email
+							<a lang="en">Email</a><a lang="fi">Sähköposti</a>
 							<input type="text" name="email" id="qemail">
 							<p id="required_email">Required</p>
 						</form> 
 						<br><br>
-						<input type="button" id="buttons" value="Back" class="bbutton">
-						<input type="button" id="buttons" value="Send" class="nbutton">
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Send" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Valmis" lang="fi" class="nbutton">
 					</div>
 					<div class="q22" style="display:none;">
 						<br><br><br>
-						<p class="q_label">Thank you for participating!</p><br><br>
-						<a id="backToMain" href="#">Return to the main screen</a>
+						<p lang="en" class="q_label">Thank you for participating!</p>
+						<p lang="fi" class="q_label">Kiitos osallistumisestasi!</p>
+						<br><br>
+						<a lang="en" id="backToMain" href="#">Return to the main screen</a>
+						<a lang="fi" id="backToMain" href="#">Takaisin alkuruutuun</a>
 					</div>
 					</form>
 				</div>

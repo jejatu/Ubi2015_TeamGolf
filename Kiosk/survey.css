@@ -27,9 +27,11 @@ header h1 {
 header img {
 	display: inline-block;
 	height: 70%;
-	float: left;
+	float:left;
 	background-color: #ffffff;
 }
+
+
 
 #content {
 	width: 100%;
