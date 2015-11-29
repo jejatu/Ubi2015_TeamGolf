@@ -72,6 +72,17 @@ var updateSurvey = function(surveyData, surveyUrl, successCb, failCb) {
 	.fail(failCb);
 };
 
+var addLottery = function(lotteryData, successCb, failCb) {
+	return $.ajax({
+		url: "/api/lotteries/",
+	type: "POST",
+	data: JSON.stringify({template: {data: lotteryData}}),
+	processData: false,
+	contentType: COLLECTIONJSON + "; " + UTF8
+	}).done(successCb)
+	.fail(failCb);
+};
+
 	return {
 		getSessions: getSessions,
 		addSession: addSession,
@@ -79,7 +90,8 @@ var updateSurvey = function(surveyData, surveyUrl, successCb, failCb) {
 		getSurveys: getSurveys,
 		addSurvey: addSurvey,
 		getSurvey: getSurvey,
-		updateSurvey: updateSurvey
+		updateSurvey: updateSurvey,
+		addLottery: addLottery
 	};
 
 })();

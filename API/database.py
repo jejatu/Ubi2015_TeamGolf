@@ -237,7 +237,7 @@ class ServerDatabase(object):
 		#todo: validate survey_dict so can assure it contains all required data.
 		
 		sql1 = "SELECT * FROM survey_data WHERE survey_id = ?"
-		sql2 = "UPDATE session_data SET code = ?"
+		sql2 = "UPDATE session_data SET code = ? WHERE session_id = ?"
 		sql3 = 	("UPDATE survey_data SET "
 				"age = ?, "
 				"gender = ?, "
@@ -258,7 +258,7 @@ class ServerDatabase(object):
 				"pub_disp_suited_for_ads = ?, "
 				"where_else_seen_public_displays = ?, "
 				"remember_seeing_ads_on_pub_disp = ?, "
-				"seen_pub_disp_for_other_than_ads = ?, "
+				"seen_pub_disp_for_other_than_ads = ? "
 				"WHERE survey_id = ?")
 		
 		
@@ -274,7 +274,8 @@ class ServerDatabase(object):
 				raise RuntimeError("Survey does not exists.")
 			
 			# Mark survey completed by removing the code from session data:
-			cursor.execute(sql2,(None,))
+			dict = self.rowToDict(row, cursor)
+			cursor.execute(sql2,(None,dict["session_id"]))
 			
 			# Modify the survey entry in the database:
 			cursor.execute(sql3,(survey_dict["age"],survey_dict["gender"],survey_dict["what_was_on_the_screen"],survey_dict["did_it_raise_positive_or_negative_emotions"],
@@ -366,3 +367,19 @@ class ServerDatabase(object):
 			else:
 				dict = self.rowToDict(row, cursor)
 				return dict["survey_id"]
+				
+	def addLottery(self, lottery_dict):
+		sql2 = "INSERT INTO lottery_data (survey_id, uname, email) VALUES(?, ?, ?)"
+		
+		with sqlite3.connect(self.db_path) as connection:
+			connection.row_factory = sqlite3.Row
+			cursor = connection.cursor()
+			cursor.execute("PRAGMA foreign_keys = ON")
+			
+			# Add session to the database:
+			cursor.execute(sql2,(lottery_dict["survey_id"], lottery_dict["uname"], lottery_dict["email"]))
+						
+			if (cursor.rowcount) > 0:
+				return cursor.lastrowid
+			else:
+				return None

@@ -302,6 +302,29 @@ class Survey(Resource):
 
 		return Response(status=204)
 
+class Lotteries(Resource):
+	def post(self):
+		# Check if request is json:
+		request_data = request.get_json(force=True)
+		if not request_data:
+			return createErrorResponse(415, "Unsupported Media Type", "API can handle only json using application/vnd.collection+json media type", "Sessions")
+
+		# Retrieve data:
+		lottery_data = _parseJsonRequest(request_data)
+
+		# Try add a new entry:
+		try:
+			new_lottery_id = g.db.addLottery(lottery_data)
+		except ValueError as error:
+			return createErrorResponse(400, "Bad request", error.message, "Lotteries")
+		except RuntimeError as error:
+			return createErrorResponse(409, "Database conflict", error.message, "Lotteries")
+
+		if not new_lottery_id:
+			return createErrorResponse(500, "Database error", "Unexpected failure.", "Lotteries")
+
+		return Response(status=200)
+
 # == API ROUTES ==
 # Session
 api.add_resource(Sessions, "/api/sessions/", endpoint="sessions")
@@ -311,9 +334,13 @@ api.add_resource(Session, "/api/sessions/<session_id>/", endpoint="session")
 api.add_resource(Surveys, "/api/surveys/", endpoint="surveys")
 api.add_resource(Survey, "/api/surveys/<survey_id>", endpoint="survey")
 
+# Lottery
+api.add_resource(Lotteries, "/api/lotteries/", endpoint="lotteries")
+
 # Shortcuts to links:
 SESSIONS_LINK = {"href":"/api/sessions/", "rel":"sessions-all", "prompt":"Sessions in the database"}
 SURVEYS_LINK = {"href":"/api/surveys/", "rel":"surveys-all", "prompt":"Surveys in the database"}
+LOTTERIES_LINK = {"href":"/api/lotteries/", "rel":"lotteries-all", "prompt":"Lotteries in the database"}
 
 if __name__ == "__main__":
 	app.run(debug=True)

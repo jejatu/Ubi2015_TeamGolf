@@ -3,29 +3,28 @@
 		<meta charset="UTF-8">
 		<title>Survey</title>
 		<link rel='stylesheet' href='survey.css'>
-		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    	<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
 		<script src="apiclient.js"></script>
 		<script src="survey_session.js"></script>
 		<script src="updateAge.js"></script>
 		<script src="updateValue.js"></script>
-    	<script type="text/javascript">
-    		window.onload = function() {
-				$("*[lang|='fi']").hide();
-      		}
-    	</script>
 		<script>
-		$(document).ready(function(){
-			$("#image_f").click(function(){
-				$("*[lang|='en']").hide();
-				$("*[lang|='fi']").show();
-			});
-			$("#image_e").click(function(){
+			window.onload = function() {
+    			startSession();
 				$("*[lang|='fi']").hide();
-				$("*[lang|='en']").show();
+      		};
+
+			$(document).ready(function(){
+				$("#image_f").click(function(){
+					$("*[lang|='en']").hide();
+					$("*[lang|='fi']").show();
+				});
+				$("#image_e").click(function(){
+					$("*[lang|='fi']").hide();
+					$("*[lang|='en']").show();
+				});
 			});
-		});
 		</script>
 	</head>
 	<body>
@@ -40,7 +39,7 @@
 			<a lang ="fi"><input type="image" id ="image_e" src="uk_flag.png" width="140" height="78"></a>
 		</header>
 		<div id="content">
-			<div id="eng">
+			<div id="qcont">
 				<div class="q1" id="eng_welcome">
 					<h2 lang="en">Great! Let's start!</h2>
 				</div>
@@ -50,32 +49,22 @@
 				<div id="questions">
 					<form id="form_eng">
 					<div class="q1">
-							<p lang="en" class="q_label">How old are you?</p>
-							<p lang="fi" class="q_label">Kuinka vanha olet?</p>
-							<p lang="en" class="q_text">Select your age by using the slider below</p>
-							<p lang="fi" class="q_text">Valitse ikäsi käyttämällä alla olevaa liukusäädintä</p>
-							<p lang="en" class="q_text">Press 'next' to continue to next question</p>
-							<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-							<div class="slider"></div><a lang="en">Age:</a><a lang="fi">Ikä:</a>
-							<output id="ageOutput" for="age" class="q_text">45</output>
-							<p class="q_label">
-							<input name="age" id="age" type=range min=15 max=75 step=1 style="width:55%; height:5%" onchange=updateAge(this.value)>
-							</p>
-							<br></br>
-							<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
-							<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
-							<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
-							<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
-							
-						<!--	<p lang="fi" class="q_text">Valitse ikäsi käyttämällä alla olevaa liukusäädintä</p>
-							<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-							<div lang="fi" class="slider"> Ikä:
-							</div>
-							<p class="q_label">
-							</p>
-							<br></br>
-							<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
-							<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton"> -->
+						<p lang="en" class="q_label">How old are you?</p>
+						<p lang="fi" class="q_label">Kuinka vanha olet?</p>
+						<p lang="en" class="q_text">Select your age by using the slider below</p>
+						<p lang="fi" class="q_text">Valitse ikäsi käyttämällä alla olevaa liukusäädintä</p>
+						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
+						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
+						<div class="slider"></div><a lang="en">Age:</a><a lang="fi">Ikä:</a>
+						<output id="ageOutput" for="age" class="q_text">45</output>
+						<p class="q_label">
+						<input name="age" id="age" type=range min=15 max=75 step=1 style="width:55%; height:5%" onchange=updateAge(this.value)>
+						</p>
+						<br></br>
+						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
+						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
+						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
+						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
 					
 					<div class="q2" style="display:none;">
@@ -89,7 +78,7 @@
 						<p lang="fi" lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
 						<br></br>
 						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Male"><a lang="en">Male</a><a lang="fi">Mies</a>
-						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Famle"><a lang="en">Female</a><a lang="fi">Nainen</a>
+						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Female"><a lang="en">Female</a><a lang="fi">Nainen</a>
 						<input type="radio" id="radio_buttons" name="gender" class="Gender" value="Other"><a lang="en">Other</a><a lang="fi">Muu</a>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
@@ -97,7 +86,6 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
-						
 						
 					<div class="q3" style="display:none;">
 						<h2 lang="en">Ok! Next question (1/18):</h2>
@@ -108,13 +96,14 @@
 						<p lang="fi" class="q_label">Ennen kun tulit täyttämään tätä kyselyä, käytit julkista näyttöä.</p>
 						<p lang="fi" class="q_label">Kerro omin sanoin mitä näytöllä näkyi (kosketa alla olevaa tekstikenttää kirjoittaaksesi)</p>
 						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-						<textarea rows=4 cols=50 id="what_was_on_the_screen" name="what_was_on_the_screen" class="text_answer" placeholder="Write here"></textarea>
+						<textarea rows=4 cols=50 id="what_was_on_the_screen" name="what_was_on_the_screen" class="text_answer" value="" placeholder="Write here"></textarea>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava"  lang="fi" class="nbutton">
-					</div>	
+					</div>
+					
 					<div class="q4" style="display:none;">
 						<h2 lang="en">Okay! Next question (2/18):</h2>
 						<p lang="en" class="q_label">Did the display raise positive or negative emotions or feelings in you?</p>
@@ -170,13 +159,14 @@
 						<p lang="fi" class="q_label">Mitä mainoksia muistat nähneesi?</p>
 						<p lang="fi" class="q_label">Kuvaile näkemiäsi mainoksia omin sanoin. Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
 						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-						<textarea rows=4 cols=50 id="describe_the_ads_you_saw" name="describe_the_ads_you_saw" class="text_answer2" placeholder="Write here"></textarea>
+						<textarea rows=4 cols=50 id="describe_the_ads_you_saw" name="describe_the_ads_you_saw" class="text_answer2" value="" placeholder="Write here"></textarea>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q7" style="display:none;">
 						<h2 lang="en">Ok! Next question (5/18):</h2>
 						<p lang="en" class="q_label">Did any of the shown ads gain your interest? How?</p>
@@ -186,13 +176,14 @@
 						<p lang="fi" class="q_label">Herättikö mikään mainos mielenkiintosi?</p>
 						<p lang="fi" class="q_label">Ole hyvä ja kerro mikäli joku mainos jäi mieleen tai herätti mielenkiintosi. Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
 						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-						<textarea rows=4 cols=50 id="did_any_of_ads_gain_intrest" name="did_any_of_ads_gain_intrest" class="text_answer3" placeholder="Write here"></textarea>
+						<textarea rows=4 cols=50 id="did_any_of_ads_gain_intrest" name="did_any_of_ads_gain_intrest" class="text_answer3" value="" placeholder="Write here"></textarea>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q8" style="display:none;">
 						<h2 lang="en">Great! Next question (6/18):</h2>
 						<p lang="en" class="q_label">Did you feel annoyed by any of the ads? Why?</p>
@@ -202,13 +193,14 @@
 						<p lang="fi" class="q_label">Ärsyttikö joku mainos sinua?</p>
 						<p lang="fi" class="q_label">Ole hyvä ja kerro mikäli joku mainos ärsytti tai herätti muuten negatiivisia tunteita sinussa. Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
 						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-						<textarea rows=4 cols=50 id="did_ads_annoy_why" name="did_ads_annoy_why" class="text_answer4" placeholder="Write here"></textarea>
+						<textarea rows=4 cols=50 id="did_ads_annoy_why" name="did_ads_annoy_why" class="text_answer4" value="" placeholder="Write here"></textarea>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q9" style="display:none;">
 						<h2 lang="en">Okay! Next question (7/18):</h2>
 						<p lang="en" class="q_label">The ads shown on the display gained my attention:</p>
@@ -232,6 +224,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q10" style="display:none;">
 						<h2 lang="en">Great! Next question (8/18):</h2>
 						<p lang="en" class="q_label">I found the ads shown on the display to be interesting:</p>
@@ -255,6 +248,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q11" style="display:none;">
 						<h2 lang="en">Ok! Next question (9/18):</h2>
 						<p lang="en" class="q_label">I might buy a product based on an ad I saw on the display:</p>
@@ -278,6 +272,7 @@
 					    <input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q12" style="display:none;">
 						<h2 lang="en">Awesome! Next question (10/18):</h2>
 						<p lang="en" class="q_label">An ad shown on a public display works better for me than a printed ad:</p>
@@ -301,6 +296,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q13" style="display:none;">
 						<h2 lang="en">Okay! Next question (11/18):</h2>
 						<p lang="en" class="q_label">An ad shown on a public display works better for me than an ad on television:</p>
@@ -324,6 +320,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q14" style="display:none;">
 						<h2 lang="en">Ok! Next question (12/18):</h2>
 						<p lang="en" class="q_label">Ads on public displays are annoying:</p>
@@ -347,6 +344,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q15" style="display:none;">
 						<h2 lang="en">Okay! Next question (13/18):</h2>
 						<p lang="en" class="q_label">I usually pay attention to advertisement:</p>
@@ -370,6 +368,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q16" style="display:none;">
 						<h2 lang="en">Great! Next question (14/18):</h2>
 						<p lang="en" class="q_label">I often buy products based on ads I’ve seen:</p>
@@ -393,6 +392,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q17" style="display:none;">
 						<h2 lang="en">Great! Next question (15/18):</h2>
 						<p lang="en" class="q_label">I think public displays are well suited for advertisement purposes:</p>
@@ -416,6 +416,7 @@
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q18" style="display:none;">
 						<h2 lang="en">Almost there! (16/18):</h2>
 						<p lang="en" class="q_label">Where else do you remember seeing public displays?</p>
@@ -425,13 +426,14 @@
 						<p lang="fi" class="q_label">Missä muualla muistat nähneesi julkisia näyttöjä?</p>
 						<p lang="fi" class="q_label">Please describe places you remember seeing public displays.(Touch text field below to insert text)</p>
 						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-						<textarea rows=4 cols=50 id="where_else_seen_public_displays" name="where_else_seen_public_displays" class="text_answer5" placeholder="Write here"></textarea>
+						<textarea rows=4 cols=50 id="where_else_seen_public_displays" name="where_else_seen_public_displays" class="text_answer5" value="" placeholder="Write here"></textarea>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q19" style="display:none;">
 						<h2 lang="en">Great! Next question (17/18):</h2>
 						<p lang="en" class="q_label">Do you remember seeing advertisement on these public displays?</p>
@@ -441,32 +443,33 @@
 						<p lang="fi" class="q_label">Muistatko nähneesi mainoksia julkisilla näytöillä?</p>
 						<p lang="fi" class="q_label">Onko joku mainos jäänyt erityisesti mieleesi? Miksi? Kirjoita koskettamalla alla olevaa tekstikenttää.)</p>
 						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-						<textarea rows=4 cols=50 id="remember_seeing_ads_on_pub_disp" name="remember_seeing_ads_on_pub_disp" class="text_answer6" placeholder="Write here"></textarea>
+						<textarea rows=4 cols=50 id="remember_seeing_ads_on_pub_disp" name="remember_seeing_ads_on_pub_disp" class="text_answer6" value="" placeholder="Write here"></textarea>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
+					
 					<div class="q20" style="display:none;">
 						<h2 lang="en">Good! Last question (18/18):</h2>
 						<p lang="en" class="q_label">Do you remember seeing public displays that were used for something other than advertising?</p>
 						<p lang="en" class="q_label">If yes, please describe the display you’ve seen (purpose, location, etc.)(Touch text field below to insert text)</p>
 						<p lang="en" class="q_text">Press 'next' to continue to next question</p>
-						<div class="q20" style="display:none;">
 						<h2 lang="fi">Hyvä! Viimeinen kysymys (18/18):</h2>
 						<p lang="fi" class="q_label">Muistatko nähneesi julkisia näyttöjä joita käytetään muuhun kuin mainostamiseen?</p>
 						<p lang="fi" class="q_label">Ole hyvä ja kuvaile näkemääsi julkista näyttöä (tarjoitus, sijainti, jne). Kirjoita koskettamalla alla olevaa tekstikenttää.</p>
 						<p lang="fi" class="q_text">Paina sen jälkeen 'seuraava' jatkaaksesi eteenpäin</p>
-						<textarea rows=4 cols=50 id="seen_pub_disp_for_other_than_ads" name="seen_pub_disp_for_other_than_ads" class="text_answer7" placeholder="Write here"></textarea>
+						<textarea rows=4 cols=50 id="seen_pub_disp_for_other_than_ads" name="seen_pub_disp_for_other_than_ads" class="text_answer7" value="" placeholder="Write here"></textarea>
 						<br></br><br></br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Next" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Seuraava" lang="fi" class="nbutton">
 					</div>
-
-					<div class="q21" style ="display:none;">
+					</form>
+					<form id="form_php">
+					<div class="q21" style="display:none;">
 						<h2 lang="en">Thank you for your time!</h2>
 						<p lang="en" class="q_text">Please fill your contact information if you wish to participate in movie ticket lottery.</p>
 						<p lang="en" class="q_text">Drawing will be conducted among respondents in February, 2016 </p>
@@ -475,23 +478,23 @@
 						<h2 lang="fi">Kiitos vastauksistasi!</h2>
 						<p lang="fi" class="q_text">Jätä sähköpostiosoitteesi mikäli haluat osallistua leffalippujen arvontaan</p>
 						<p lang="fi" class="q_text">Arvonta suoritetaan vastanneiden kesken helmikuussa 2016. Voittajille ilmoitetaan henkilökohtaisesti.</p>
-						<p lang="fi" class="q_text">Paina sen jälkeen 'valmis' päättääksesi kyselyn.
+						<p lang="fi" class="q_text">Paina sen jälkeen 'valmis' päättääksesi kyselyn.</p>
 						<br>
 						<br>
-						<form>
-							<a lang ="en">Name</a><a lang="fi">Nimi</a>
-							<input type="text" name="name" id="qname">
-							<p id="required_name">Required</p>
-							<a lang="en">Email</a><a lang="fi">Sähköposti</a>
-							<input type="text" name="email" id="qemail">
-							<p id="required_email">Required</p>
-						</form> 
+						<input type="hidden" id="qsurvey_id" name="survey_id" values="0"/>
+						<a lang ="en">Name</a><a lang="fi">Nimi</a>
+						<input type="text" name="uname" id="qname" value=""/>
+						<p id="required_name">Required</p>
+						<a lang="en">Email</a><a lang="fi">Sähköposti</a>
+						<input type="text" name="email" id="qemail" value=""/>
+						<p id="required_email">Required</p>
 						<br><br>
 						<input type="button" id="buttons" value="Back" lang="en" class="bbutton">
 						<input type="button" id="buttons" value="Send" lang="en" class="nbutton">
 						<input type="button" id="buttons" value="Takaisin" lang="fi" class="bbutton">
 						<input type="button" id="buttons" value="Valmis" lang="fi" class="nbutton">
 					</div>
+					</form> 
 					<div class="q22" style="display:none;">
 						<br><br><br>
 						<p lang="en" class="q_label">Thank you for participating!</p>
@@ -500,11 +503,7 @@
 						<a lang="en" id="backToMain" href="#">Return to the main screen</a>
 						<a lang="fi" id="backToMain" href="#">Takaisin alkuruutuun</a>
 					</div>
-					</form>
 				</div>
-			</div>
-
-			<div id="fin" style="display:none;">
 			</div>
 		</div>
 	</body>

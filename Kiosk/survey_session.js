@@ -1,30 +1,5 @@
 // REMEMBER to include apiclient!
-var DEBUG = false;
-
-//Survey database variables:
-var survey_id = 0;
-var session_id = 0;
-var notice_display = null;
-var content_screen = "";
-var realize_ads = null;
-var rating_feelings = 0;
-var number_of_ads = 0;
-var ad_content = "";
-var ads_interesting = null;
-var cause_interest = "";
-var ads_attention = null;
-var might_buy = null;
-var ads_attention_general = null;
-var public_displays_suited = null;
-var kind_of_ad = "";
-var remember_ad = null;
-var focus = "";
-var affect_interaction = "";
-var stop_motivation = "";
-var our_location_suitable = null;
-var suitable_location = "";
-var feeling_sounds = "";
-var best_kind_of_ads = "";
+var DEBUG = true;
 
 var survey_data = [
 {name: "survey_id", value: 0},
@@ -56,6 +31,7 @@ var timer = 1600000;
 var timeoutId = null;
 var idlePage = "index.html";
 var survey_sent = false;
+var surveyRetrieved = false;
 
 //Question page:
 var curr_page = 0;
@@ -95,6 +71,9 @@ function loadNextPage() {
 	if (curr_page == pages.length-2) {
 		serializeAnswers();
 		sendSurvey();
+		if (surveyRetrieved) {
+			sendLottery();
+		}
 		$(pages[curr_page]).hide();
 		curr_page += 1;
 		$(pages[curr_page]).show();
@@ -102,20 +81,6 @@ function loadNextPage() {
 	}
 
 	if (curr_page < pages.length-2) {
-		if ($("#button1").is(":visible")) {
-			if (!$("#qname").val()) {
-				$("#required_name").css("visibility", "visible");
-				return false;
-			}
-			if (!$("#qemail").val()) {
-				$("#required_email").css("visibility", "visible");
-				return false;
-			}
-		}
-		else {
-			$("#required_name").css("visibility", "hidden");
-			$("#required_email").css("visibility", "hidden");
-		}
 		$(pages[curr_page]).hide();
 		curr_page += 1;
 		$(pages[curr_page]).show();
@@ -136,33 +101,37 @@ function loadPreviousPage() {
 function startSession() {
 	startTimer();
 	startTime = new Date().getTime();
-	console.log("here2");
+	surveyRetrieved = false;
 	getSurvey();
 }
 
 function serializeAnswers() {
-	if ($("#eng").is(":visible")) {
-		var fields = $("#form_eng").serializeArray();
-		
-		$.each(fields, function(i, field) {
-			for (var j = 0; j < survey_data.length; j++) {
-				if (field.name == survey_data[j].name) {
-					if (field.value == "true") {
-						survey_data[j].value = true;
-					}
-					else if (field.value == "false") {
-						survey_data[j].value = false;
-					}
-					else if (survey_data[j].value != "") {
-						survey_data[j].value += "," + field.value;
-					}
-					else {
-						survey_data[j].value = parseInt(field.value, 10);
+	var fields = $("#form_eng").serializeArray();
+	$.each(fields, function(i, field) {
+		console.log(field);
+		console.log(field.value);
+		for (var j = 0; j < survey_data.length; j++) {
+			if (field.name == survey_data[j].name) {
+				if (field.value == "true") {
+					survey_data[j].value = true;
+				}
+				else if (field.value == "false") {
+					survey_data[j].value = false;
+				}
+				else if (!isNaN(field.value)) {
+					survey_data[j].value = parseInt(field.value, 10);
+				}
+				else if (survey_data[j].value != "") {
+					survey_data[j].value += "," + field.value;
+				}
+				else {
+					if (field.value != "") {
+						survey_data[j].value = field.value;
 					}
 				}
 			}
-		});
-	}
+		}
+	});
 }
 
 function getSurvey() {
@@ -173,6 +142,8 @@ function getSurvey() {
 		jqData = data.collection.items[0].data;
 		survey_data[0].value = jqData[0].value;
 		survey_data[1].value = jqData[1].value;
+		document.getElementById("qsurvey_id").value = survey_data[0].value;
+		surveyRetrieved = true;
 	};
 	
 	var failCb = function(jqXHR, textStatus, errorThrown) {
@@ -205,6 +176,27 @@ function sendSurvey() {
 	return false;
 }
 
+function sendLottery() {
+	var successCb = function(data, textStatus, jqXHR) {
+		if (DEBUG) {
+		console.log("RECEIVED RESPONSE: data: ", data, ", textStatus: ", textStatus);
+		}
+	};
+	
+	var failCb = function(jqXHR, textStatus, errorThrown) {
+		if (DEBUG) {
+			console.log("ERROR: textStatus: ", textStatus, ", error: ", errorThrown);
+		}
+	};
+	
+	var lotterydata = $("#form_php").serializeArray();
+	
+	
+	APIClient.addLottery(lotterydata, successCb, failCb);
+	
+	return false;
+}
+
 function endSession() {
   if (!survey_sent) {
 	serializeAnswers();
@@ -231,7 +223,4 @@ $(function() {
 	$(".nbutton").on("click", loadNextPage);
 	$(".bbutton").on("click", loadPreviousPage);
 	$("#backToMain").on("click", endSession);
-	
-	startSession();
-	console.log("here1");
 })

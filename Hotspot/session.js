@@ -1,5 +1,5 @@
 // REMEMBER to include apiclient!
-var DEBUG = true;
+var DEBUG = false;
 
 //database information
 var id = 0;
@@ -65,7 +65,9 @@ function generateUUID(){
 function startSession() {
 	startTimer();
 	startTime = new Date().getTime();
-	
+	if (sessionStorage.getItem("code") !== null) {
+		sessionStorage.removeItem("code");
+	}
 	setSessionCode();
 	
 	if (DEBUG) {
