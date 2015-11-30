@@ -1,5 +1,5 @@
 var type = "video";
-var muted = true
+var muted = false;
 var images = ["ads/ad1.png", "ads/ad2.png", "ads/ad3.png"];
 var videos = ["ads/video1.mp4", "ads/video2.mp4", "ads/video3.mp4"];
 var videos2 = ["ads/video1.webm", "ads/video2.webm", "ads/video3.webm"];
