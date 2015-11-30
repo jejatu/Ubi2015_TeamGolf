@@ -15,11 +15,12 @@ var contentAd = "";
 var timer = 60000;
 var timeoutId = null;
 var idlePage = "index.html";
+var sessionSent = false;
+var thankyouShown = false;
 
 var invalid_codes = [];
 
 function handleStart() {
-	console.log("works");
 	numberOfInteractions++;
 	resetTimer();
 }
@@ -134,13 +135,6 @@ function getCode() {
 	return code;
 }
 
-function showCode() {
-	console.log("bra");
-	$("#survey_iframe").contents().find("#waitcode").hide();
-	$("#survey_iframe").contents().find("#code").html("<p>" + code + "</p>");
-	$("#survey_iframe").contents().find("#codeButton").show();
-}
-
 function sendSession() {
 	var sessionData = [	
 		{name: "code", value: code},
@@ -157,6 +151,7 @@ function sendSession() {
 		if (DEBUG) {
 			console.log("RECEIVED RESPONSE: data: ", data, ", textStatus: ", textStatus);
 		}
+		sessionSent = true;
 	};
 	
 	var failCb = function(jqXHR, textStatus, errorThrown) {
@@ -171,8 +166,10 @@ function sendSession() {
 }
 
 function endSession() {
-  sendSession();
-  window.location = idlePage;
+	if (!sentSession) {
+		sendSession();
+	}
+  	window.location = idlePage;
 }
 
 function startTimer() {
@@ -185,7 +182,11 @@ function resetTimer() {
 }
 
 function executeTimer() {
-  endSession();
+	if (thankyouShown) {
+		code = "";
+	}
+	
+	endSession();
 }
 
 $(function() {
