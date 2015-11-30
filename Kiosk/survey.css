@@ -38,10 +38,15 @@ header img {
 	background: #454545;
 }
 
-#qcont {
+#eng, #fin {
 	margin: 0 auto;
 	background: #ffffff;
 	text-align: center;
+}
+
+
+:lang(fi){
+	display:none;
 }
 
 .q_label {
@@ -54,7 +59,11 @@ header img {
 	width:2%;
 	text-align:center;
 }
+input[type=image] {
+	position:relative;
+	right:20%;
 
+}
 
 input[type=button]{
     width: 10em;  height: 5em;
