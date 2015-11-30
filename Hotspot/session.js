@@ -158,6 +158,8 @@ function sendSession() {
 		if (DEBUG) {
 			console.log("ERROR: textStatus: ", textStatus, ", error: ", errorThrown);
 		}
+		
+		setTimeout(sendSession(), 5000);
 	};
 	
 	APIClient.addSession(sessionData, successCb, failCb);

@@ -169,6 +169,7 @@ function sendSurvey() {
 		if (DEBUG) {
 			console.log("ERROR: textStatus: ", textStatus, ", error: ", errorThrown);
 		}
+		setTimeout(sendSurvey(), 5000);
 	};
 	
 	APIClient.updateSurvey(survey_data, sessionStorage.getItem("survey_url"), successCb, failCb);
@@ -187,6 +188,7 @@ function sendLottery() {
 		if (DEBUG) {
 			console.log("ERROR: textStatus: ", textStatus, ", error: ", errorThrown);
 		}
+		setTimeout(sendLottery(), 5000);
 	};
 	
 	var lotterydata = $("#form_php").serializeArray();
