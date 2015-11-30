@@ -7,23 +7,6 @@
 		<script src="numpadPressed.js"></script>
 		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		<script type="text/javascript">
-    		window.onload = function() {
-				$("*[lang|='en']").hide();
-      		}
-    	</script>
-		<script>
-		$(document).ready(function(){
-			$("#image_f").click(function(){
-				$("*[lang|='fi']").hide();
-				$("*[lang|='en']").show();
-			});
-			$("#image_e").click(function(){
-				$("*[lang|='en']").hide();
-				$("*[lang|='fi']").show();
-			});
-		});
-		</script>
 	</head>
 
 	<body>
@@ -31,30 +14,18 @@
 	<!-- <div id ="Blocks" style ="left: 1%" ></div> -->
 	        <div class="content_wrapper">
     <!-- HEADER STARTS HERE -->
-            <div lang="fi" class="q_header_container">
+            <div class="q_header_container">
                 <p class="q_header_text">Kysely: vastaa ja voita leffalippuja!</p>
-            </div>            
-			<div lang="en" class="q_header_container">
-                <p class="q_header_text">Questionare: answer and win movietickets!</p>
             </div>
 
     <!-- CONTENT STARTS HERE-->
             <div class="q_text_container">
-                <div lang="fi" class="intro_div">
-				<input type="image" id ="image_f" src="fin_flag.png" width="140" height="78">
+                <div class="intro_div">
                 <p class="q_text">
                    <strong>LUE TÄMÄ ENSIN: </strong>
                 </p>
                 <p class="q_text">Osallistuaksesi tähän kyselyyn täytyy sinulla olla 3-numeroinen koodi, jonka voit syöttää viereiseen kenttään.</p>
                 <p class="q_text">Mikäli sinulla ei vielä ole koodia, ole hyvä ja käy ensin osallistumassa tutkimukseen yläkuppilassa sijaitsevalla näytöllä. Saat tarvitsemasi koodin näytöltä.</p>
-                </div>
-				<div lang="en" class="intro_div">
-				<input type="image" id ="image_e" src="uk_flag.png" width="140" height="78">
-                <p class="q_text">
-                   <strong>READ THIS FIRST: </strong>
-                </p>
-                <p class="q_text">To participate for this survey you need to have 3-digit code, which you can enter to the adjacent field</p>
-                <p class="q_text">If you don't have the code yet, you can get it by interacting with the public display in the Aaula- caffeteria. You get the code form the public display</p>
                 </div>
                 <div class="intro_div" style="border:0">
                 <div id="c_div" class="code_div">
@@ -65,8 +36,7 @@
                         <a onclick="checkCode()" class="round-button">OK</a>
                     </div></div>
                 </div>
-                <p lang="fi" class="code_helper">SYÖTÄ KOODI:</p>
-				<p lang="en" class="code_helper">ENTER CODE:</p>
+                <p class="code_helper">SYÖTÄ KOODI:</p>
 
                 <div id="numpad">
                     <table id="key_table">
@@ -95,15 +65,10 @@
             </div>
                 </div>
    <!-- FOOTER STARTS HERE-->
-            <div lang="fi" id="footer">
+            <div id="footer">
                 <p class="footer_text">Kyselyn totetuttajana Oulun yliopiston tietotekniikan osaston Urban Computing and Cultures -tutkimusryhmä</p>
                 <p class="footer_text">Yhteystietojensa jättäneiden vastaajien kesken arvotaan 5kpl kahden hengen leffalippupaketteja Finnkinon teattereihin</p>
                 <p class="footer_text">Arvonta suoritetaan helmikuussa 2016, voittajille ilmoitetaan henkilökohtaisesti</p>
-            </div>
-			<div lang="en" id="footer">
-                <p class="footer_text">Survey is conducted by Oulu university's Computer Science and Engineering faculty Urban Computing and Cultures -research group</p>
-                <p class="footer_text">Within those whom answered and leaved their contact informatio draw are conducted for 5 piece of two person movieticket pakcets for Finnkino theathers </p>
-                <p class="footer_text">Draw will be conducted in February 2016, winners will be notified presonally</p>
             </div>
         </div>
 

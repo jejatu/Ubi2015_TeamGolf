@@ -204,7 +204,13 @@ function endSession() {
 	serializeAnswers();
 	sendSurvey();
   }
+  
   window.location = idlePage;
+}
+
+function endLink() {
+	endSession();
+	return false;
 }
 
 function startTimer() {
@@ -224,5 +230,6 @@ $(function() {
 	// Navigation:
 	$(".nbutton").on("click", loadNextPage);
 	$(".bbutton").on("click", loadPreviousPage);
-	$("#backToMain").on("click", endSession);
+	$("#backToMainEn").on("click", endLink);
+	$("#backToMainFi").on("click", endLink);
 })
