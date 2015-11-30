@@ -5,6 +5,11 @@
     	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
     	<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
     	<script type="text/javascript">
+    		$(function() {
+    			var t = document.getElementsByTagName("body")[0];
+    			t.addEventListener("mousedown", parent.handleStart, false);
+    		})
+    	
     		window.onload = function() {
     			function checkCode() {
     				if (sessionStorage.getItem("code") !== null) {

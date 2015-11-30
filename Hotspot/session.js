@@ -18,9 +18,11 @@ var idlePage = "index.html";
 
 var invalid_codes = [];
 
-$(document).mousedown(function(event) {
-    numberOfInteractions++;
-});
+function handleStart() {
+	console.log("works");
+	numberOfInteractions++;
+	resetTimer();
+}
 
 function getRightNow() {
   var today = new Date();
@@ -185,3 +187,8 @@ function resetTimer() {
 function executeTimer() {
   endSession();
 }
+
+$(function() {
+	var t = document.getElementsByTagName("body")[0];
+    t.addEventListener("mousedown", handleStart, false);
+})
