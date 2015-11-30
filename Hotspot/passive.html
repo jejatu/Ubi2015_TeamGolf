@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+    	<link rel="stylesheet" type="text/css" href="hotspot.css" />
+    	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    	<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+    	<script src='jquery.ui.touch-punch.min.js'></script>
+    	<script src="apiclient.js"></script>
+    	<script src="adcycler.js"></script>
+    	<script type="text/javascript">
+    		window.onload = function() {
+        		startAds();
+      		}
+    	</script>
+  	</head>
+  	<body>
+  		<div id="content">
+  		
+  			<div id="imgContent" class="img_content">
+  				<img id="image" />
+  			</div>
+  			
+  			<div class="video_content">
+    			<video id="video">
+    				<source src="ads/video1.webm" type="video/webm" id="webm_src"></source>
+    				<source src="ads/video1.mp4" type="video/mp4" id="mp4_src"></source>
+    			</video>
+    		</div>
+  		</div>
+  	</body>
+</html>
