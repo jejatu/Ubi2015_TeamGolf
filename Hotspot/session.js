@@ -168,7 +168,7 @@ function sendSession() {
 }
 
 function endSession() {
-	if (!sentSession) {
+	if (!sessionSent) {
 		sendSession();
 	}
   	window.location = idlePage;
