@@ -39,13 +39,13 @@ function startAds() {
 
   if (type === "image") {
     $(".img_content").show();
-	current = getRandomInt(0, images.length);
+	current = getRandomInt(0, images.length - 1);
     cycleImages();
     setInterval(cycleImages, interval);
   }
   else if (type === "video") {
     $(".video_content").show();
-	current = getRandomInt(0, videos.length);
+	current = getRandomInt(0, videos.length - 1);
     cycleVideos();
     document.getElementById('video').onended = function() {
       cycleVideos();
