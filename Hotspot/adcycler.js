@@ -5,7 +5,7 @@ var videos = ["ads/video1.mp4", "ads/video2.mp4", "ads/video3.mp4"];
 var videos2 = ["ads/video1.webm", "ads/video2.webm", "ads/video3.webm"];
 var current = 0;
 var interval = 6000;
-var adsStarted = []
+var adsStarted = [];
 
 function cycleImages() {
   document.getElementById('image').src = images[current];
