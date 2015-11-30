@@ -29,17 +29,23 @@ function cycleVideos() {
 	adsStarted.push(current);
 }
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function startAds() {
   $(".img_content").hide();
   $(".video_content").hide();
 
   if (type === "image") {
     $(".img_content").show();
+	current = getRandomInt(0, images.length);
     cycleImages();
     setInterval(cycleImages, interval);
   }
   else if (type === "video") {
     $(".video_content").show();
+	current = getRandomInt(0, videos.length);
     cycleVideos();
     document.getElementById('video').onended = function() {
       cycleVideos();
