@@ -1,5 +1,5 @@
 var type = "video";
-var muted = false;
+var muted = true;
 var images = ["ads/ad1.png", "ads/ad2.png", "ads/ad3.png", "ads/ad4.jpg",
 				"ads/ad5.jpg", "ads/ad6.jpg", "ads/ad7.jpg", "ads/ad8.png",
 				"ads/ad9.jpg", "ads/ad10.jpeg", "ads/ad11.jpg", "ads/ad12.jpg",
