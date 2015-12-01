@@ -1,5 +1,5 @@
 var type = "video";
-var muted = true
+var muted = false;
 var images = ["ads/ad1.png", "ads/ad2.png", "ads/ad3.png", "ads/ad4.jpg",
 				"ads/ad5.jpg", "ads/ad6.jpg", "ads/ad7.jpg", "ads/ad8.png",
 				"ads/ad9.jpg", "ads/ad10.jpeg", "ads/ad11.jpg", "ads/ad12.jpg",
@@ -14,7 +14,7 @@ var videos2 = ["ads/video1.webm", "ads/video2.webm", "ads/video3.webm", "ads/vid
 				"ads/video13.webm", "ads/video14.webm", "ads/video15.webm"];
 var current = 0;
 var interval = 6000;
-var adsStarted = []
+var adsStarted = [];
 
 function cycleImages() {
   document.getElementById('image').src = images[current];
@@ -38,17 +38,23 @@ function cycleVideos() {
 	adsStarted.push(current);
 }
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function startAds() {
   $(".img_content").hide();
   $(".video_content").hide();
 
   if (type === "image") {
     $(".img_content").show();
+	current = getRandomInt(0, images.length - 1);
     cycleImages();
     setInterval(cycleImages, interval);
   }
   else if (type === "video") {
     $(".video_content").show();
+	current = getRandomInt(0, videos.length - 1);
     cycleVideos();
     document.getElementById('video').onended = function() {
       cycleVideos();
