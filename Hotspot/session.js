@@ -12,7 +12,7 @@ var typeOfAd = "";
 var contentAd = "";
 
 //idle variables
-var timer = 60000;
+var timer = 180000;
 var timeoutId = null;
 var idlePage = "index.html";
 var sessionSent = false;
