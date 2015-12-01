@@ -5,13 +5,11 @@ var images = ["ads/ad1.png", "ads/ad2.png", "ads/ad3.png", "ads/ad4.jpg",
 				"ads/ad9.jpg", "ads/ad10.jpeg", "ads/ad11.jpg", "ads/ad12.jpg",
 				"ads/ad13.jpg", "ads/ad14.jpg", "ads/ad15.jpg"];
 var videos = ["ads/video1.mp4", "ads/video2.mp4", "ads/video3.mp4",
-				"ads/video5.mp4", "ads/video6.mp4", "ads/video7.mp4", "ads/video8.mp4",
-				"ads/video10.mp4", "ads/video11.mp4",
-				"ads/video14.mp4"];
+				"ads/video5.mp4", "ads/video7.mp4", "ads/video8.mp4",
+				"ads/video10.mp4", "ads/video11.mp4"];
 var videos2 = ["ads/video1.webm", "ads/video2.webm", "ads/video3.webm",
-				"ads/video5.webm", "ads/video6.webm", "ads/video7.webm", "ads/video8.webm",
-				"ads/video10.webm", "ads/video11.webm",
-				"ads/video14.webm"];
+				"ads/video5.webm", "ads/video7.webm", "ads/video8.webm",
+				"ads/video10.webm", "ads/video11.webm"];
 var current = 0;
 var interval = 6000;
 var adsStarted = [];
