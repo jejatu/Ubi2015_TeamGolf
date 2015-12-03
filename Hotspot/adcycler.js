@@ -1,9 +1,9 @@
 var type = "image";
 var muted = true;
 var images = ["ads/ad1.png", "ads/ad2.png", "ads/ad3.png",
-				"ads/ad5.jpg", "ads/ad8.png",
+				"ads/ad5.jpg",
 				"ads/ad9.jpg", "ads/ad10.jpeg", "ads/ad11.jpg", "ads/ad12.jpg",
-				"ads/ad13.jpg", "ads/ad14.jpg", "ads/ad15.jpg"];
+				"ads/ad13.jpg", "ads/ad15.jpg"];
 var videos = ["ads/video1.mp4", "ads/video2.mp4", "ads/video3.mp4",
 				"ads/video5.mp4", "ads/video7.mp4", "ads/video8.mp4",
 				"ads/video10.mp4", "ads/video11.mp4"];
